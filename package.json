@@ -1,0 +1,11 @@
+{
+  "name": "minesweeper",
+  "version": "1.0.0",
+  "description": "Quick React App",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "smranck",
+  "license": "MIT"
+}
