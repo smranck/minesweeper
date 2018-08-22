@@ -7,5 +7,10 @@
     "test": "test"
   },
   "author": "smranck",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^1.18.3",
+    "webpack": "^4.17.0",
+    "webpack-cli": "^3.1.0"
+  }
 }
