@@ -6,3 +6,12 @@ package-lock.json
 
 #todo
 todo.me
+
+# dotenv environment variables file
+.env
+
+# vscode
+.vscode
+
+# webpack
+client/dist/bundle.js
