@@ -71,6 +71,60 @@ export default class Board extends React.Component {
   }
 
   // looks for neighboring cells and returns them
+  traverseBoard(x, y, data) {
+    const el = [];
+    let { height, width } = this.props;
+
+    // up
+    if (x > 0) {
+      el.push(data[x - 1][y]);
+    }
+
+    // down
+    if (x < height - 1) {
+      el.push(data[x + 1][y]);
+    }
+
+    // left
+    if (y > 0) {
+      el.push(data[x][y - 1]);
+    }
+
+    // right
+    if (y < width) {
+      el.push(data[x][y + 1]);
+    }
+
+    // top left
+    if (x > 0 && y > 0) {
+      el.push(data[x - 1][y - 1]);
+    }
+
+    // top right
+    if (x > 0 && y < width - 1) {
+      el.push(data[x - 1][y + 1]);
+    }
+
+    // bottom right
+    if (x < height - 1 && y < width - 1) {
+      el.push(data[x + 1][y + 1]);
+    }
+
+    // bottom left
+    if (x < height - 1 && y > 0) {
+      el.push(data[x + 1][y - 1]);
+    }
+
+    return el;
+  }
+
+  initBoardData(height, width, mines) {
+    let data = this.createEmptyArray(height, width);
+    data = this.plantMines(data, height, width, mines);
+    data = this.getNeighbors(data, height, width);
+
+    return data;
+  }
 
   render() {
     let { mines, gameStatus, boardData } = this.state;
