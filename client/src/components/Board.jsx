@@ -32,6 +32,17 @@ export default class Board extends React.Component {
     return data;
   }
 
+  plantMines(data, height, width, mines) {
+    let x;
+    let y;
+    let minesPlanted = 0;
+
+    while (minesPlanted < mines) {
+      x = Math.floor(Math.random * width);
+      y = Math.floor(Math.random * height);
+    }
+  }
+
   render() {
     let { mines, gameStatus, boardData } = this.state;
     return (
