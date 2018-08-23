@@ -27,7 +27,7 @@ export default class Tile extends React.Component {
   }
 }
 
-//Typechecking with PropTypes. Not Super needed as of now.
+// Typechecking with PropTypes. Not Super needed as of now.
 const tileItemShape = {
   isRevealed: PropTypes.bool,
   isMine: PropTypes.bool,
