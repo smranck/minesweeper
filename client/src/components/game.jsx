@@ -4,7 +4,7 @@ import Board from './Board';
 export default class Game extends React.Component {
   constructor(props) {
     super(props);
-    state = {
+    this.state = {
       height: 8,
       width: 8,
       mines: 10,
