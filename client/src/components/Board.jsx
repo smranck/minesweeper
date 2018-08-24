@@ -1,12 +1,15 @@
 import React from 'react';
+import Tile from './Tile';
 
 export default class Board extends React.Component {
   constructor(props) {
     super(props);
+    let { height, width, mines } = this.props;
+    let boardInfo = this.initBoardData(height, width, mines);
     this.state = {
-      boardData: this.initBoardData(this.props.height, this.props.width, this.props.mines),
+      boardData: boardInfo,
       gameStatus: false,
-      mineCount: this.props.mines,
+      // mineCount: mines,
     };
   }
 
@@ -126,6 +129,7 @@ export default class Board extends React.Component {
   }
 
   // last thing adds a clearfix div after the last cell of each row, or should
+  // but really this should be in its own component most likely
   renderBoard(data) {
     return data.map(datarow => datarow.map(dataitem => (
       <div key={dataitem.x * datarow.length + dataitem.y}>
