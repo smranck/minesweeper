@@ -26,16 +26,3 @@ export default class Tile extends React.Component {
     );
   }
 }
-
-// Typechecking with PropTypes. Not Super needed as of now.
-const tileItemShape = {
-  isRevealed: PropTypes.bool,
-  isMine: PropTypes.bool,
-  isFlagged: PropTypes.bool,
-};
-
-Tile.propTypes = {
-  value: PropTypes.objectOf(PropTypes.shape(tileItemShape)),
-  onClick: PropTypes.func,
-  cMenu: PropTypes.func,
-};
