@@ -18,11 +18,26 @@ export default class Tile extends React.Component {
   }
 
   render() {
-    const { value, onClick, cMenu } = this.props;
+    const { onClick, cMenu } = this.props;
     return (
-      <div onClick={this.props.onClick} onContextMenu={this.props.cMenu}>
+      <div onClick={onClick} onContextMenu={cMenu}>
         {this.getValue()}
       </div>
     );
   }
 }
+
+// function for default props
+let alertErrs = () => {
+  console.log('err in Tile.jsx props');
+};
+// seems right?
+Tile.defaultProps = {
+  onClick: alertErrs,
+  cMenu: alertErrs,
+};
+
+Tile.propTypes = {
+  onClick: PropTypes.func,
+  cMenu: PropTypes.func,
+};
