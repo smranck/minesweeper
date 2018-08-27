@@ -34,19 +34,23 @@ export default class Board extends React.Component {
     return data;
   }
 
+  // not returning anthing!
   plantMines(data, height, width, mines) {
     let x;
     let y;
     let minesPlanted = 0;
+    let updatedData = data;
 
     while (minesPlanted < mines) {
-      x = Math.floor(Math.random * width);
-      y = Math.floor(Math.random * height);
-      if (!data[x][y].isMine) {
-        data[x][y].isMine = true;
+      x = Math.floor(Math.random() * width);
+      y = Math.floor(Math.random() * height);
+      if (!updatedData[x][y].isMine) {
+        updatedData[x][y].isMine = true;
         minesPlanted += 1;
       }
     }
+
+    return updatedData;
   }
 
   // function to look at a cell's neighbors to see if they are mines and remembers it
@@ -57,6 +61,7 @@ export default class Board extends React.Component {
         if (data[i][j].isMine !== true) {
           let mine = 0;
           const area = this.traverseBoard(data[i][j].x, data[i][j].y, data);
+          // console.log('******************GETNEIGHBORS', area);
           area.map((value) => {
             if (value.isMine) {
               mine += 1;
@@ -93,7 +98,7 @@ export default class Board extends React.Component {
     }
 
     // right
-    if (y < width) {
+    if (y < width - 1) {
       el.push(data[x][y + 1]);
     }
 
@@ -159,4 +164,7 @@ export default class Board extends React.Component {
       </div>
     );
   }
+  // render() {
+  //   return <div>Board says Hello!</div>;
+  // }
 }
