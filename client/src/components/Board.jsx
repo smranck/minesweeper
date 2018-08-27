@@ -133,8 +133,15 @@ export default class Board extends React.Component {
     return data;
   }
 
+  handleCellClick() {
+    console.log('handling Cell click from Board.jsx');
+  }
+
+  handleContextMenu() {
+    console.log('handling right click from Board.jsx');
+  }
   // last thing adds a clearfix div after the last cell of each row, or should
-  // but really this should be in its own component most likely
+  // there's no way this should be here
   renderBoard(data) {
     return data.map(datarow => datarow.map(dataitem => (
       <div key={dataitem.x * datarow.length + dataitem.y}>
@@ -160,10 +167,29 @@ export default class Board extends React.Component {
           <br />
           <span className="info">{gameStatus}</span>
         </div>
+        {console.log(boardData)}
         {this.renderBoard(boardData)}
       </div>
     );
   }
+
+  // original
+  // render() {
+  //   let { mines, gameStatus, boardData } = this.state;
+  //   return (
+  //     <div className="board">
+  //       <div className="game-info">
+  //         <span className="info">
+  //           mines:
+  //           {mines}
+  //         </span>
+  //         <br />
+  //         <span className="info">{gameStatus}</span>
+  //       </div>
+  //       {this.renderBoard(boardData)}
+  //     </div>
+  //   );
+  // }
   // render() {
   //   return <div>Board says Hello!</div>;
   // }
