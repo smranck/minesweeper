@@ -6,7 +6,7 @@ export default class Tile extends React.Component {
     const { value } = this.props;
 
     if (!value.isRevealed) {
-      return this.props.value.isFlagged ? 'F' : null;
+      return value.isFlagged ? 'F' : null;
     }
     if (value.isMine) {
       return 'B';
