@@ -133,26 +133,40 @@ export default class Board extends React.Component {
     return data;
   }
 
-  handleCellClick() {
+  handleCellClick(x, y) {
     console.log('handling Cell click from Board.jsx');
+    let { boardData } = this.state;
+    let updatedBoard = boardData.slice();
+    updatedBoard[x][y].isRevealed = true;
+    this.setState({
+      boardData: updatedBoard,
+    });
   }
 
-  handleContextMenu() {
+  handleContextMenu(x, y) {
     console.log('handling right click from Board.jsx');
+
   }
+
   // last thing adds a clearfix div after the last cell of each row, or should
   // there's no way this should be here
+
   renderBoard(data) {
-    return data.map(datarow => datarow.map(dataitem => (
-      <div key={dataitem.x * datarow.length + dataitem.y}>
-        <Tile
-          onClick={() => this.handleCellClick(dataitem.x, dataitem.y)}
-          cMenu={e => this.handleContextMenu(e, dataitem.x, dataitem.y)}
-          value={dataitem}
-        />
-        {datarow[datarow.length - 1] === dataitem ? <div className="clear" /> : ''}
-      </div>
-    )));
+    return data.map(datarow => {
+      return datarow.map(dataitem => {
+        console.log('mapping off dataitem');
+        return (
+          <div key={dataitem.x * datarow.length + dataitem.y}>
+            <Tile
+              onClick={() => this.handleCellClick(dataitem.x, dataitem.y)}
+              cMenu={e => this.handleContextMenu(e, dataitem.x, dataitem.y)}
+              value={dataitem}
+            />
+            {datarow[datarow.length - 1] === dataitem ? <div className="clear" /> : ''}
+          </div>
+        );
+      });
+    });
   }
 
   render() {
