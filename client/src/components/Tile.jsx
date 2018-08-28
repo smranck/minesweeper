@@ -18,8 +18,15 @@ export default class Tile extends React.Component {
     return value.neighbor;
   }
 
+  // seems to have access to this.props so let's do that
+  handleClick(e) {
+    e.preventDefault();
+    let { value, onClick } = this.props;
+    onClick(value.x, value.y);
+  }
+
   render() {
-    const { onClick, cMenu, value } = this.props;
+    const { cMenu, value } = this.props;
     const styles = {
       tile: {
         maxWidth: '400px',
@@ -38,13 +45,18 @@ export default class Tile extends React.Component {
         fontWeight: '600',
       },
     };
+
     let className = `tile${value.isRevealed ? '' : ' hidden'}${value.isMine ? ' is-mine' : ''}${
       value.isFlagged ? ' is-flag' : ''
     }`;
     return (
-      <div style={styles.tile} className={className} onClick={onClick} onContextMenu={cMenu}>
+      <div
+        style={styles.tile}
+        className={className}
+        onClick={e => this.handleClick(e)}
+        onContextMenu={cMenu}
+      >
         {this.getValue()}
-        Hello From Tile
       </div>
     );
   }
@@ -58,7 +70,7 @@ let alertErrs = () => {
 Tile.defaultProps = {
   onClick: alertErrs,
   cMenu: alertErrs,
-  value: alertErrs(),
+  value: alertErrs,
 };
 
 Tile.propTypes = {
