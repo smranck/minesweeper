@@ -23,6 +23,7 @@ export default class Tile extends React.Component {
     e.preventDefault();
     let { value, onClick } = this.props;
     onClick(value.x, value.y);
+    // console.log(this.getValue());
   }
 
   render() {
@@ -31,7 +32,7 @@ export default class Tile extends React.Component {
       tile: {
         maxWidth: '400px',
         margin: '0 auto',
-        padding: '20px',
+        padding: '0px',
         background: '#7b7b7b',
         border: '1px solid #fff',
         float: 'left',
