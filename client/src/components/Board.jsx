@@ -145,43 +145,57 @@ export default class Board extends React.Component {
 
   handleContextMenu(x, y) {
     console.log('handling right click from Board.jsx');
-
   }
 
   // last thing adds a clearfix div after the last cell of each row, or should
   // there's no way this should be here
 
   renderBoard(data) {
-    return data.map(datarow => {
-      return datarow.map(dataitem => {
-        console.log('mapping off dataitem');
-        return (
-          <div key={dataitem.x * datarow.length + dataitem.y}>
-            <Tile
-              onClick={() => this.handleCellClick(dataitem.x, dataitem.y)}
-              cMenu={e => this.handleContextMenu(e, dataitem.x, dataitem.y)}
-              value={dataitem}
-            />
-            {datarow[datarow.length - 1] === dataitem ? <div className="clear" /> : ''}
-          </div>
-        );
-      });
-    });
+    return data.map(datarow => datarow.map((dataitem) => {
+      console.log('mapping off dataitem');
+      return (
+        <div key={dataitem.x * datarow.length + dataitem.y}>
+          <Tile
+            onClick={() => this.handleCellClick(dataitem.x, dataitem.y)}
+            cMenu={e => this.handleContextMenu(e, dataitem.x, dataitem.y)}
+            value={dataitem}
+          />
+          {datarow[datarow.length - 1] === dataitem ? <div className="clear" /> : ''}
+        </div>
+      );
+    }));
   }
 
   render() {
-    let { mines, gameStatus, boardData } = this.state;
+    const { gameStatus, boardData } = this.state;
+    let { mines } = this.props;
+    console.log('MIIIINES BOYZ', this);
+    const styles = {
+      gameInfo: {
+        marginBottom: '20px',
+        background: '#19a0d9',
+        padding: '7px',
+        textAlign: 'center',
+        color: '#fff',
+        minHeight: '100px',
+        borderRadius: '7px',
+        info: {
+          display: 'block',
+          marginTop: '15px',
+        },
+      },
+    };
     return (
       <div className="board">
-        <div className="game-info">
-          <span className="info">
-            mines:
+        <div className="game-info" style={styles.gameInfo}>
+          <span className="info" style={styles.gameInfo.info}>
+            Mines:
             {mines}
           </span>
           <br />
           <span className="info">{gameStatus}</span>
         </div>
-        {console.log(boardData)}
+        {console.log(boardData, 'Returning in Board render')}
         {this.renderBoard(boardData)}
       </div>
     );
