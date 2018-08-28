@@ -13,8 +13,15 @@ export default class Game extends React.Component {
 
   render() {
     const { height, width, mines } = this.state;
+    const styles = {
+      game: {
+        maxWidth: '400px',
+        margin: '0 auto',
+        padding: '20px',
+      },
+    };
     return (
-      <div className="game">
+      <div className="game" style={styles.game}>
         <Board height={height} width={width} mines={mines} />
       </div>
     );
