@@ -145,25 +145,12 @@ export default class Board extends React.Component {
 
   handleContextMenu(x, y) {
     console.log('handling right click from Board.jsx');
-  }
-
-  // last thing adds a clearfix div after the last cell of each row, or should
-  // there's no way this should be here
-
-  renderBoard(data) {
-    return data.map(datarow => datarow.map((dataitem) => {
-      console.log('mapping off dataitem');
-      return (
-        <div key={dataitem.x * datarow.length + dataitem.y}>
-          <Tile
-            onClick={() => this.handleCellClick(dataitem.x, dataitem.y)}
-            cMenu={e => this.handleContextMenu(e, dataitem.x, dataitem.y)}
-            value={dataitem}
-          />
-          {datarow[datarow.length - 1] === dataitem ? <div className="clear" /> : ''}
-        </div>
-      );
-    }));
+    let { boardData } = this.state;
+    let updatedBoard = boardData.slice();
+    updatedBoard[x][y].isFlagged = true;
+    this.setState({
+      boardData: updatedBoard,
+    });
   }
 
   // function to reveal whole board on game end
@@ -180,10 +167,27 @@ export default class Board extends React.Component {
     });
   }
 
+  // last thing adds a clearfix div after the last cell of each row, or should
+  // there's no way this should be here
+
+  renderBoard(data) {
+    return data.map(datarow => datarow.map((dataitem) => {
+      return (
+        <div key={dataitem.x * datarow.length + dataitem.y}>
+          <Tile
+            onClick={() => this.handleCellClick(dataitem.x, dataitem.y)}
+            cMenu={() => this.handleContextMenu(dataitem.x, dataitem.y)}
+            value={dataitem}
+          />
+          {datarow[datarow.length - 1] === dataitem ? <div className="clear" /> : ''}
+        </div>
+      );
+    }));
+  }
+
   render() {
     const { gameStatus, boardData } = this.state;
     let { mines } = this.props;
-    console.log('MIIIINES BOYZ', this);
     const styles = {
       gameInfo: {
         marginBottom: '20px',
