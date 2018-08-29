@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 export default class Tile extends React.Component {
   getValue() {
-    console.log('in GETVALUE');
     const { value } = this.props;
 
     if (!value.isRevealed) {
@@ -24,6 +23,14 @@ export default class Tile extends React.Component {
     let { value, onClick } = this.props;
     onClick(value.x, value.y);
     // console.log(this.getValue());
+  }
+
+  handleContextMenu(e) {
+    e.preventDefault();
+    let { value, cMenu } = this.props;
+    cMenu(value.x, value.y);
+    console.log(this.getValue());
+    console.log(this.props.value, '***************************');
   }
 
   render() {
@@ -55,7 +62,7 @@ export default class Tile extends React.Component {
         style={styles.tile}
         className={className}
         onClick={e => this.handleClick(e)}
-        onContextMenu={cMenu}
+        onContextMenu={e => this.handleContextMenu(e)}
       >
         {this.getValue()}
       </div>
