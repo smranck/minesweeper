@@ -166,6 +166,20 @@ export default class Board extends React.Component {
     }));
   }
 
+  // function to reveal whole board on game end
+  revealBoard() {
+    let { boardData } = this.state;
+    let updatedBoard = boardData.slice();
+    for (let i = 0; i < updatedBoard.length; i += 1) {
+      for (let j = 0; j < updatedBoard[i].length; j += 1) {
+        updatedBoard[i][j].isRevealed = true;
+      }
+    }
+    this.setState({
+      boardData: updatedBoard,
+    });
+  }
+
   render() {
     const { gameStatus, boardData } = this.state;
     let { mines } = this.props;
