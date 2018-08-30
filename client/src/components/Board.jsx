@@ -148,8 +148,8 @@ export default class Board extends React.Component {
     console.log('handling right click from Board.jsx');
     let { boardData, mineCount } = this.state;
     let updatedBoard = boardData.slice();
-    updatedBoard[x][y].isFlagged = true;
-    mineCount = Math.max(0, mineCount - 1);
+    updatedBoard[x][y].isFlagged = !updatedBoard[x][y].isFlagged;
+    updatedBoard[x][y].isFlagged ? mineCount -= 1 : mineCount += 1;
     this.setState({
       boardData: updatedBoard,
       mineCount,
