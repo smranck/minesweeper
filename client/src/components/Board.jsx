@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Tile from './Tile.jsx';
 
 export default class Board extends React.Component {
@@ -132,12 +133,35 @@ export default class Board extends React.Component {
 
     return data;
   }
-
+  
+  /*
+  right now it only reveals. Now need to do something
+    if bomb: game status to false;
+      and board reveal
+      and somehow offer a new game? Let's save that
+    if empty:
+      need a function that reveals empty and all attached empties
+  */
   handleCellClick(x, y) {
     console.log('handling Cell click from Board.jsx');
     let { boardData } = this.state;
     let updatedBoard = boardData.slice();
+    console.log(updatedBoard[x][y]);
+    // check whether it was already revealed or flagged
+    if (updatedBoard[x][y].isRevealed || updatedBoard[x][y].isFlagged) {
+      return;
+    }
+    // handle a bomb
+    if (updatedBoard[x][y].isMine) {
+      this.revealBoard();
+      console.log('Big Loser baby');
+      // will want to offer another game in a modal probably
+    }
     updatedBoard[x][y].isRevealed = true;
+    // handle an empty
+    if (updatedBoard[x][y].neighbor === 0) {
+
+    }
     this.setState({
       boardData: updatedBoard,
     });
@@ -149,7 +173,7 @@ export default class Board extends React.Component {
     let { boardData, mineCount } = this.state;
     let updatedBoard = boardData.slice();
     updatedBoard[x][y].isFlagged = !updatedBoard[x][y].isFlagged;
-    updatedBoard[x][y].isFlagged ? mineCount -= 1 : mineCount += 1;
+    updatedBoard[x][y].isFlagged ? (mineCount -= 1) : (mineCount += 1);
     this.setState({
       boardData: updatedBoard,
       mineCount,
@@ -174,18 +198,16 @@ export default class Board extends React.Component {
   // there's no way this should be here
 
   renderBoard(data) {
-    return data.map(datarow => datarow.map((dataitem) => {
-      return (
-        <div key={dataitem.x * datarow.length + dataitem.y}>
-          <Tile
-            onClick={() => this.handleCellClick(dataitem.x, dataitem.y)}
-            cMenu={() => this.handleContextMenu(dataitem.x, dataitem.y)}
-            value={dataitem}
-          />
-          {datarow[datarow.length - 1] === dataitem ? <div className="clear" /> : ''}
-        </div>
-      );
-    }));
+    return data.map(datarow => datarow.map(dataitem => (
+      <div key={dataitem.x * datarow.length + dataitem.y}>
+        <Tile
+          onClick={() => this.handleCellClick(dataitem.x, dataitem.y)}
+          cMenu={() => this.handleContextMenu(dataitem.x, dataitem.y)}
+          value={dataitem}
+        />
+        {datarow[datarow.length - 1] === dataitem ? <div className="clear" /> : ''}
+      </div>
+    )));
   }
 
   render() {
