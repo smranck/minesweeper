@@ -30,7 +30,6 @@ export default class Tile extends React.Component {
     let { value, cMenu } = this.props;
     cMenu(value.x, value.y);
     console.log(this.getValue());
-    console.log(this.props.value, '***************************');
   }
 
   render() {
