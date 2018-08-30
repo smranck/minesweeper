@@ -9,7 +9,7 @@ export default class Board extends React.Component {
     this.state = {
       boardData: boardInfo,
       gameStatus: false,
-      // mineCount: mines,
+      mineCount: mines,
     };
   }
 
@@ -143,13 +143,16 @@ export default class Board extends React.Component {
     });
   }
 
+  // might someday handle overflagging
   handleContextMenu(x, y) {
     console.log('handling right click from Board.jsx');
-    let { boardData } = this.state;
+    let { boardData, mineCount } = this.state;
     let updatedBoard = boardData.slice();
     updatedBoard[x][y].isFlagged = true;
+    mineCount = Math.max(0, mineCount - 1);
     this.setState({
       boardData: updatedBoard,
+      mineCount,
     });
   }
 
@@ -186,8 +189,7 @@ export default class Board extends React.Component {
   }
 
   render() {
-    const { gameStatus, boardData } = this.state;
-    let { mines } = this.props;
+    const { gameStatus, boardData, mineCount } = this.state;
     const styles = {
       gameInfo: {
         marginBottom: '20px',
@@ -208,7 +210,7 @@ export default class Board extends React.Component {
         <div className="game-info" style={styles.gameInfo}>
           <span className="info" style={styles.gameInfo.info}>
             Mines:
-            {mines}
+            {mineCount}
           </span>
           <br />
           <span className="info">{gameStatus}</span>
