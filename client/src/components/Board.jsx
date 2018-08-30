@@ -133,7 +133,23 @@ export default class Board extends React.Component {
 
     return data;
   }
-  
+
+  // function to reveal all adjacent when an empty is pressed
+  revealEmpty(x, y, boardData) {
+    console.log('Well Brother it was in fact empty');
+    let board = boardData;
+    // reveal that tile
+    board[x][y].isRevealed = true;
+    // if that tile is empty (we know first but for the rest) then recur
+    if (board[x][y].neighbor === 0) {
+      let adjacents = this.traverseBoard(x, y, board);
+      for (let i = 0; i < adjacents.length; i += 1) {
+        board = this.revealEmpty(adjacents[i].x, adjacents[i].y, board);
+      }
+    }
+    return board;
+  }
+
   /*
   right now it only reveals. Now need to do something
     if bomb: game status to false;
@@ -160,7 +176,8 @@ export default class Board extends React.Component {
     updatedBoard[x][y].isRevealed = true;
     // handle an empty
     if (updatedBoard[x][y].neighbor === 0) {
-
+      updatedBoard = this.revealEmpty(x, y, updatedBoard);
+      // this.revealEmpty(x, y, updatedBoard);
     }
     this.setState({
       boardData: updatedBoard,
