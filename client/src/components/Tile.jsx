@@ -34,7 +34,7 @@ export default class Tile extends React.Component {
   }
 
   render() {
-    const { cMenu, value } = this.props;
+    const { value } = this.props;
     const styles = {
       tile: {
         maxWidth: '400px',
