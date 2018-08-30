@@ -136,8 +136,12 @@ export default class Board extends React.Component {
 
   // function to reveal all adjacent when an empty is pressed
   revealEmpty(x, y, boardData) {
-    console.log('Well Brother it was in fact empty');
     let board = boardData;
+    // if revealed already, don't do anything
+    // base case
+    if (board[x][y].isRevealed) {
+      return board;
+    }
     // reveal that tile
     board[x][y].isRevealed = true;
     // if that tile is empty (we know first but for the rest) then recur
@@ -173,11 +177,11 @@ export default class Board extends React.Component {
       console.log('Big Loser baby');
       // will want to offer another game in a modal probably
     }
-    updatedBoard[x][y].isRevealed = true;
     // handle an empty
     if (updatedBoard[x][y].neighbor === 0) {
       updatedBoard = this.revealEmpty(x, y, updatedBoard);
-      // this.revealEmpty(x, y, updatedBoard);
+    } else {
+      updatedBoard[x][y].isRevealed = true;
     }
     this.setState({
       boardData: updatedBoard,
