@@ -215,9 +215,27 @@ export default class Board extends React.Component {
     });
   }
 
+  // function to check whether a board has been won. Returns a boolean.
+  checkForWin() {
+    let { boardData } = this.state;
+    // iterate through board to see if it's a winning board
+    let isWin = true;
+    for (let i = 0; i < boardData.length; i += 1) {
+      let tileCount = 0;
+      while (isWin && tileCount < boardData[i].length) {
+        // if any tile is not a mine and is not revealed, no win
+        if (!boardData[i][tileCount].isMine && !boardData[i].isRevealed) {
+          isWin = false;
+        }
+        tileCount += 1;
+      }
+    }
+    return isWin;
+  }
+
+
   // last thing adds a clearfix div after the last cell of each row, or should
   // there's no way this should be here
-
   renderBoard(data) {
     return data.map(datarow => datarow.map(dataitem => (
       <div key={dataitem.x * datarow.length + dataitem.y}>
