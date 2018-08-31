@@ -183,6 +183,11 @@ export default class Board extends React.Component {
     } else {
       updatedBoard[x][y].isRevealed = true;
     }
+
+    if (!updatedBoard[x][y].isMine && this.checkForWin()) {
+      console.log("You WON!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    }
+
     this.setState({
       boardData: updatedBoard,
     });
@@ -224,7 +229,7 @@ export default class Board extends React.Component {
       let tileCount = 0;
       while (isWin && tileCount < boardData[i].length) {
         // if any tile is not a mine and is not revealed, no win
-        if (!boardData[i][tileCount].isMine && !boardData[i].isRevealed) {
+        if (!boardData[i][tileCount].isMine && !boardData[i][tileCount].isRevealed) {
           isWin = false;
         }
         tileCount += 1;
