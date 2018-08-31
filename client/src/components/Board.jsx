@@ -9,7 +9,7 @@ export default class Board extends React.Component {
     let boardInfo = this.initBoardData(height, width, mines);
     this.state = {
       boardData: boardInfo,
-      gameStatus: false,
+      gameStatus: 'Game In Progress',
       mineCount: mines,
     };
   }
@@ -234,6 +234,11 @@ export default class Board extends React.Component {
         }
         tileCount += 1;
       }
+    }
+    if (isWin) {
+      this.setState({
+        gameStatus: 'YOU WON!!!!!!!!!',
+      })
     }
     return isWin;
   }
