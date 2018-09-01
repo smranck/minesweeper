@@ -173,8 +173,7 @@ export default class Board extends React.Component {
     }
     // handle a bomb
     if (updatedBoard[x][y].isMine) {
-      this.revealBoard();
-      console.log('Big Loser baby');
+      this.handleLoss();
       // will want to offer another game in a modal probably
     }
     // handle an empty
@@ -243,6 +242,14 @@ export default class Board extends React.Component {
     return isWin;
   }
 
+  // function to handle losses
+  handleLoss() {
+    this.revealBoard();
+    console.log('Big Loser baby');
+    this.setState({
+      gameStatus: 'YOU LOST!!!!!!!!!!',
+    });
+  }
 
   // last thing adds a clearfix div after the last cell of each row, or should
   // there's no way this should be here
