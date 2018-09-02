@@ -156,11 +156,8 @@ export default class Board extends React.Component {
 
   /*
   right now it only reveals. Now need to do something
-    if bomb: game status to false;
-      and board reveal
-      and somehow offer a new game? Let's save that
-    if empty:
-      need a function that reveals empty and all attached empties
+    if bomb:
+      assert loss and offer new game
   */
   handleCellClick(x, y) {
     console.log('handling Cell click from Board.jsx');
