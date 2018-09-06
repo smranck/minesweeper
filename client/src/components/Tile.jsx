@@ -32,6 +32,12 @@ export default class Tile extends React.Component {
     // console.log(this.getValue());
   }
 
+  handleDoubleClick(e) {
+    e.preventDefault();
+    let { value, doubleClick } = this.props;
+    doubleClick(value.x, value.y);
+  }
+
   render() {
     const { value } = this.props;
     const styles = {
@@ -62,6 +68,7 @@ export default class Tile extends React.Component {
         className={className}
         onClick={e => this.handleClick(e)}
         onContextMenu={e => this.handleContextMenu(e)}
+        onDoubleClick={e => this.handleDoubleClick(e)}
       >
         {this.getValue()}
       </div>

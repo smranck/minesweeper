@@ -202,6 +202,10 @@ export default class Board extends React.Component {
     });
   }
 
+  handleDoubleClick(x, y) {
+    console.log('handling a double click mon!!!!!')
+  }
+
   // function to reveal whole board on game end
   revealBoard() {
     let { boardData } = this.state;
@@ -256,6 +260,7 @@ export default class Board extends React.Component {
         <Tile
           onClick={() => this.handleCellClick(dataitem.x, dataitem.y)}
           cMenu={() => this.handleContextMenu(dataitem.x, dataitem.y)}
+          doubleClick={() => this.handleDoubleClick(dataitem.x, dataitem.y)}
           value={dataitem}
         />
         {datarow[datarow.length - 1] === dataitem ? <div className="clear" /> : ''}
