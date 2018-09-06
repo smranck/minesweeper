@@ -202,6 +202,10 @@ export default class Board extends React.Component {
     });
   }
 
+  // this should check if the number of flags is the same as the neighbors value
+  // if so, reveal all neighbors that aren't flagged
+  // if any bombs are revealed, it's a loss
+  // then set state
   handleDoubleClick(x, y) {
     console.log('handling a double click mon!!!!!')
   }
