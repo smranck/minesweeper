@@ -9,8 +9,9 @@ export default class Board extends React.Component {
     let boardInfo = this.initBoardData(height, width, mines);
     this.state = {
       boardData: boardInfo,
-      gameStatus: 'Game In Progress',
+      gameMessage: 'Game In Progress',
       mineCount: mines,
+      gameState: 1, // game state 1 is pregame, 2 is in game, 3 is game over
     };
   }
 
@@ -241,7 +242,7 @@ export default class Board extends React.Component {
     }
     if (isWin) {
       this.setState({
-        gameStatus: 'YOU WON!!!!!!!!!',
+        gameMessage: 'YOU WON!!!!!!!!!',
       })
     }
     return isWin;
@@ -252,7 +253,7 @@ export default class Board extends React.Component {
     this.revealBoard();
     console.log('Big Loser baby');
     this.setState({
-      gameStatus: 'YOU LOST!!!!!!!!!!',
+      gameMessage: 'YOU LOST!!!!!!!!!!',
     });
   }
 
@@ -273,7 +274,7 @@ export default class Board extends React.Component {
   }
 
   render() {
-    const { gameStatus, boardData, mineCount } = this.state;
+    const { gameMessage, boardData, mineCount } = this.state;
     const styles = {
       gameInfo: {
         marginBottom: '20px',
@@ -297,7 +298,7 @@ export default class Board extends React.Component {
             {mineCount}
           </span>
           <br />
-          <span className="info">{gameStatus}</span>
+          <span className="info">{gameMessage}</span>
         </div>
         {console.log(boardData, 'Returning in Board render')}
         {this.renderBoard(boardData)}
@@ -307,7 +308,7 @@ export default class Board extends React.Component {
 
   // original
   // render() {
-  //   let { mines, gameStatus, boardData } = this.state;
+  //   let { mines, gameMessage, boardData } = this.state;
   //   return (
   //     <div className="board">
   //       <div className="game-info">
@@ -316,7 +317,7 @@ export default class Board extends React.Component {
   //           {mines}
   //         </span>
   //         <br />
-  //         <span className="info">{gameStatus}</span>
+  //         <span className="info">{gameMessage}</span>
   //       </div>
   //       {this.renderBoard(boardData)}
   //     </div>
