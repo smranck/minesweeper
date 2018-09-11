@@ -40,31 +40,12 @@ export default class Tile extends React.Component {
 
   render() {
     const { value } = this.props;
-    const styles = {
-      tile: {
-        maxWidth: '400px',
-        margin: '0 auto',
-        padding: '0px',
-        // background: '#7b7b7b',
-        border: '1px solid #fff',
-        float: 'left',
-        lineHeight: '45px',
-        height: '45px',
-        textAlign: 'center',
-        width: '45px',
-        // cursor: 'pointer',
-        borderRadius: '5px',
-        color: '#fff',
-        // fontWeight: '600',
-      },
-    };
 
     let className = `tile${value.isRevealed ? ' revealed' : ' hidden'}${
       value.isMine ? ' is-mine' : ''
     }${value.isFlagged ? ' is-flag' : ''}`;
     return (
       <div
-        style={styles.tile}
         className={className}
         onClick={e => this.handleClick(e)}
         onContextMenu={e => this.handleContextMenu(e)}
