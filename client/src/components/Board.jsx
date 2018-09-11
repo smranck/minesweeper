@@ -131,7 +131,9 @@ export default class Board extends React.Component {
     let data = this.createEmptyArray(height, width);
     data = this.plantMines(data, height, width, mines);
     data = this.getNeighbors(data, height, width);
-
+    this.setState({
+      gameState: 2,
+    })
     return data;
   }
 
@@ -253,6 +255,7 @@ export default class Board extends React.Component {
     this.revealBoard();
     console.log('Big Loser baby');
     this.setState({
+      gameState: 3,
       gameMessage: 'YOU LOST!!!!!!!!!!',
     });
   }
