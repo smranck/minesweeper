@@ -130,7 +130,7 @@ export default class Board extends React.Component {
     data = this.plantMines(data, height, width, mines);
     data = this.getNeighbors(data, height, width);
     this.setState({
-      gameState: 2,
+      gameState: 1,
     })
     return data;
   }
@@ -162,7 +162,7 @@ export default class Board extends React.Component {
   */
   handleCellClick(x, y) {
     console.log('handling Cell click from Board.jsx');
-    let { boardData } = this.state;
+    let { boardData, gameState } = this.state;
     let updatedBoard = boardData.slice();
     console.log(updatedBoard[x][y]);
     // check whether it was already revealed or flagged
@@ -172,7 +172,8 @@ export default class Board extends React.Component {
     // handle a bomb
     if (updatedBoard[x][y].isMine) {
       this.handleLoss();
-      // will want to offer another game in a modal probably
+      gameState = 3;
+      // gameState 3 will offer a new game in rendered modal
     }
     // handle an empty
     if (updatedBoard[x][y].neighbor === 0) {
@@ -187,6 +188,8 @@ export default class Board extends React.Component {
 
     this.setState({
       boardData: updatedBoard,
+      // if the game is lost, that's gameState. Otherwise in progress
+      gameState: gameState === 3 ? 3 : 2,
     });
   }
 
@@ -254,7 +257,6 @@ export default class Board extends React.Component {
     this.revealBoard();
     console.log('Big Loser baby');
     this.setState({
-      gameState: 3,
       gameMessage: 'YOU LOST!!!!!!!!!!',
     });
   }
