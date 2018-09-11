@@ -15,8 +15,6 @@ export default class Board extends React.Component {
     };
   }
 
-  // need the renderBoard, initBoardData functions
-
   createEmptyArray(height, width) {
     const data = [];
     for (let i = 0; i < height; i += 1) {
