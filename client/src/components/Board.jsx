@@ -308,25 +308,4 @@ export default class Board extends React.Component {
       </div>
     );
   }
-
-  // original
-  // render() {
-  //   let { mines, gameMessage, boardData } = this.state;
-  //   return (
-  //     <div className="board">
-  //       <div className="game-info">
-  //         <span className="info">
-  //           mines:
-  //           {mines}
-  //         </span>
-  //         <br />
-  //         <span className="info">{gameMessage}</span>
-  //       </div>
-  //       {this.renderBoard(boardData)}
-  //     </div>
-  //   );
-  // }
-  // render() {
-  //   return <div>Board says Hello!</div>;
-  // }
 }
