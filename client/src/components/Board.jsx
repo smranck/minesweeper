@@ -244,6 +244,7 @@ export default class Board extends React.Component {
     }
     if (isWin) {
       this.setState({
+        gameState: 3,
         gameMessage: 'YOU WON!!!!!!!!!',
       })
     }
