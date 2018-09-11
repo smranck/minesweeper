@@ -194,12 +194,14 @@ export default class Board extends React.Component {
     console.log('handling right click from Board.jsx');
     let { boardData, mineCount } = this.state;
     let updatedBoard = boardData.slice();
-    updatedBoard[x][y].isFlagged = !updatedBoard[x][y].isFlagged;
-    updatedBoard[x][y].isFlagged ? (mineCount -= 1) : (mineCount += 1);
-    this.setState({
-      boardData: updatedBoard,
-      mineCount,
-    });
+    if (updatedBoard[x][y].isRevealed === false) {
+      updatedBoard[x][y].isFlagged = !updatedBoard[x][y].isFlagged;
+      updatedBoard[x][y].isFlagged ? (mineCount -= 1) : (mineCount += 1);
+      this.setState({
+        boardData: updatedBoard,
+        mineCount,
+      });
+    }
   }
 
   // this should check if the number of flags is the same as the neighbors value
