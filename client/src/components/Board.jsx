@@ -155,16 +155,12 @@ export default class Board extends React.Component {
     return board;
   }
 
-  /*
-  right now it only reveals. Now need to do something
-    if bomb:
-      assert loss and offer new game
-  */
   handleCellClick(x, y) {
     console.log('handling Cell click from Board.jsx');
-    let { boardData, gameState } = this.state;
+    let { boardData } = this.state;
     let updatedBoard = boardData.slice();
-    console.log(updatedBoard[x][y]);
+    let gameLoss = false;
+    // console.log(updatedBoard[x][y]);
     // check whether it was already revealed or flagged
     if (updatedBoard[x][y].isRevealed || updatedBoard[x][y].isFlagged) {
       return;
@@ -172,7 +168,7 @@ export default class Board extends React.Component {
     // handle a bomb
     if (updatedBoard[x][y].isMine) {
       this.handleLoss();
-      gameState = 3;
+      gameLoss = true;
       // gameState 3 will offer a new game in rendered modal
     }
     // handle an empty
@@ -183,13 +179,13 @@ export default class Board extends React.Component {
     }
 
     if (!updatedBoard[x][y].isMine && this.checkForWin()) {
-      console.log("You WON!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+      console.log('You WON!!!!!!!!!!!!!!!!!!!!!!!!!!!');
     }
 
     this.setState({
       boardData: updatedBoard,
       // if the game is lost, that's gameState. Otherwise in progress
-      gameState: gameState === 3 ? 3 : 2,
+      gameState: gameLoss ? 3 : 2,
     });
   }
 
