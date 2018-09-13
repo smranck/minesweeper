@@ -1,6 +1,6 @@
 import React from 'react';
 // eslint-disable-next-line react/prefer-stateless-function
-export default class Board extends React.Component {
+export default class StatusBar extends React.Component {
   render() {
     let { mineCount, gameMessage } = this.props;
 
