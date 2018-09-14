@@ -277,25 +277,25 @@ export default class Board extends React.Component {
 
   render() {
     const { gameMessage, boardData, mineCount } = this.state;
-    const styles = {
-      gameInfo: {
-        marginBottom: '20px',
-        background: '#19a0d9',
-        padding: '7px',
-        textAlign: 'center',
-        color: '#fff',
-        minHeight: '100px',
-        borderRadius: '7px',
-        info: {
-          display: 'block',
-          marginTop: '15px',
-        },
-      },
-    };
+    // const styles = {
+    //   gameInfo: {
+    //     marginBottom: '20px',
+    //     background: '#19a0d9',
+    //     padding: '7px',
+    //     textAlign: 'center',
+    //     color: '#fff',
+    //     minHeight: '100px',
+    //     borderRadius: '7px',
+    //     info: {
+    //       display: 'block',
+    //       marginTop: '15px',
+    //     },
+    //   },
+    // };
     return (
       <div className="board">
-        <div className="game-info" style={styles.gameInfo}>
-          <span className="info" style={styles.gameInfo.info}>
+        <div className="game-info">
+          <span className="info">
             Mines:
             {mineCount}
           </span>
