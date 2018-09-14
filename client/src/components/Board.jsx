@@ -294,14 +294,6 @@ export default class Board extends React.Component {
     // };
     return (
       <div className="board">
-        <div className="game-info">
-          <span className="info">
-            Mines:
-            {mineCount}
-          </span>
-          <br />
-          <span className="info">{gameMessage}</span>
-        </div>
         {console.log(boardData, 'Returning in Board render')}
         {this.renderBoard(boardData)}
       </div>
