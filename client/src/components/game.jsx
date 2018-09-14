@@ -1,5 +1,6 @@
 import React from 'react';
 import Board from './Board.jsx';
+import StatusBar from './StatusBar.jsx';
 
 export default class Game extends React.Component {
   constructor(props) {
