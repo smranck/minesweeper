@@ -9,11 +9,15 @@ export default class Game extends React.Component {
       height: 8,
       width: 8,
       mines: 10,
+      gameMessage: 'Game in Progress',
+      gameState: 1, // game state 1 is pregame, 2 is in game, 3 is game over
     };
   }
 
   render() {
-    const { height, width, mines } = this.state;
+    const {
+      height, width, mines, gameMessage,
+    } = this.state;
     const styles = {
       game: {
         maxWidth: '400px',
@@ -23,6 +27,7 @@ export default class Game extends React.Component {
     };
     return (
       <div className="game" style={styles.game}>
+        <StatusBar gameMessage={gameMessage} mineCount={mines} />
         <Board height={height} width={width} mines={mines} />
       </div>
     );
