@@ -21,11 +21,16 @@ export default class Game extends React.Component {
       mines,
     });
   }
+
+  decrementMines() {
+    let { mines } = this.state;
+    mines -= 1;
+    this.setState({
+      mines,
+    });
+  }
   /*
 in game:
-need a function to add mines
-function to lower mines
-add game status to state
 function to change game status
 */
 
