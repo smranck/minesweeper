@@ -14,6 +14,13 @@ export default class Game extends React.Component {
     };
   }
 
+  incrementMines() {
+    let { mines } = this.state;
+    mines += 1;
+    this.setState({
+      mines,
+    });
+  }
   /*
 in game:
 need a function to add mines
