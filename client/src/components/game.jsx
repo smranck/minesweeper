@@ -14,6 +14,14 @@ export default class Game extends React.Component {
     };
   }
 
+  /*
+in game:
+need a function to add mines
+function to lower mines
+add game status to state
+function to change game status
+*/
+
   render() {
     const {
       height, width, mines, gameMessage,
