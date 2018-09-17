@@ -34,6 +34,18 @@ in game:
 function to change game status
 */
 
+  changeGameMessage() {
+    let { gameState } = this.gameState;
+    let messages = {
+      1: 'Game About to Begin',
+      2: 'Game in Progress',
+      3: 'Game Over',
+    };
+    this.setState({
+      gameMessage: messages[gameState],
+    });
+  }
+
   render() {
     const {
       height, width, mines, gameMessage,
