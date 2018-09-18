@@ -29,10 +29,12 @@ export default class Game extends React.Component {
       mines,
     });
   }
-  /*
-in game:
-function to change game status
-*/
+
+  changeGameState(x) {
+    this.setState({
+      gameState: x,
+    });
+  }
 
   changeGameMessage() {
     let { gameState } = this.gameState;
