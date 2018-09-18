@@ -128,7 +128,7 @@ export default class Board extends React.Component {
     data = this.plantMines(data, height, width, mines);
     data = this.getNeighbors(data, height, width);
     let { changeGameState } = this.props;
-    changeGameState(1);
+    changeGameState(2);
     return data;
   }
 
