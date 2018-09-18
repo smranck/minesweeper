@@ -276,7 +276,7 @@ export default class Board extends React.Component {
   }
 
   render() {
-    const { gameMessage, boardData, mineCount } = this.state;
+    const { boardData } = this.state;
     return (
       <div className="board">
         {console.log(boardData, 'Returning in Board render')}
