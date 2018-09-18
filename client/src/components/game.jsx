@@ -10,7 +10,7 @@ export default class Game extends React.Component {
       width: 8,
       mines: 10,
       gameMessage: 'Game in Progress',
-      gameState: 1, // game state 1 is pregame, 2 is in game, 3 is game over
+      gameState: 1, // game state 1 is pregame, 2 is in game, 3 is game less, 4 is game win
     };
   }
 
