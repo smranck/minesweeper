@@ -12,6 +12,31 @@ export default class Board extends React.Component {
     };
   }
 
+  // function to look at a cell's neighbors to see if they are mines and remembers it
+  // this is the source of the number in the cell
+  getNeighbors(data, height, width) {
+    let updatedData = data;
+    for (let i = 0; i < height; i += 1) {
+      for (let j = 0; j < width; j += 1) {
+        if (data[i][j].isMine !== true) {
+          let mine = 0;
+          const area = this.traverseBoard(data[i][j].x, data[i][j].y, data);
+          // console.log('******************GETNEIGHBORS', area);
+          area.map((value) => {
+            if (value.isMine) {
+              mine += 1;
+            }
+          });
+          if (mine === 0) {
+            updatedData[i][j].isEmpty = true;
+          }
+          updatedData[i][j].neighbor = mine;
+        }
+      }
+    }
+    return updatedData;
+  }
+
   createEmptyArray(height, width) {
     const data = [];
     for (let i = 0; i < height; i += 1) {
@@ -47,30 +72,6 @@ export default class Board extends React.Component {
       }
     }
 
-    return updatedData;
-  }
-
-  // function to look at a cell's neighbors to see if they are mines and remembers it
-  getNeighbors(data, height, width) {
-    let updatedData = data;
-    for (let i = 0; i < height; i += 1) {
-      for (let j = 0; j < width; j += 1) {
-        if (data[i][j].isMine !== true) {
-          let mine = 0;
-          const area = this.traverseBoard(data[i][j].x, data[i][j].y, data);
-          // console.log('******************GETNEIGHBORS', area);
-          area.map((value) => {
-            if (value.isMine) {
-              mine += 1;
-            }
-          });
-          if (mine === 0) {
-            updatedData[i][j].isEmpty = true;
-          }
-          updatedData[i][j].neighbor = mine;
-        }
-      }
-    }
     return updatedData;
   }
 
