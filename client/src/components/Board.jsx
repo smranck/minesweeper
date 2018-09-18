@@ -277,21 +277,6 @@ export default class Board extends React.Component {
 
   render() {
     const { gameMessage, boardData, mineCount } = this.state;
-    // const styles = {
-    //   gameInfo: {
-    //     marginBottom: '20px',
-    //     background: '#19a0d9',
-    //     padding: '7px',
-    //     textAlign: 'center',
-    //     color: '#fff',
-    //     minHeight: '100px',
-    //     borderRadius: '7px',
-    //     info: {
-    //       display: 'block',
-    //       marginTop: '15px',
-    //     },
-    //   },
-    // };
     return (
       <div className="board">
         {console.log(boardData, 'Returning in Board render')}
