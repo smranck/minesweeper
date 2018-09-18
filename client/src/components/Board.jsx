@@ -259,28 +259,24 @@ export default class Board extends React.Component {
     });
   }
 
-  // last thing adds a clearfix div after the last cell of each row, or should
-  // there's no way this should be here
-  renderBoard(data) {
-    return data.map(datarow => datarow.map(dataitem => (
-      <div key={dataitem.x * datarow.length + dataitem.y}>
-        <Tile
-          onClick={() => this.handleCellClick(dataitem.x, dataitem.y)}
-          cMenu={() => this.handleContextMenu(dataitem.x, dataitem.y)}
-          doubleClick={() => this.handleDoubleClick(dataitem.x, dataitem.y)}
-          value={dataitem}
-        />
-        {datarow[datarow.length - 1] === dataitem ? <div className="clear" /> : ''}
-      </div>
-    )));
-  }
+  // last thing adds a clearfix div after the last cell of each row, or should. Needed?
 
   render() {
     const { boardData } = this.state;
     return (
       <div className="board">
         {console.log(boardData, 'Returning in Board render')}
-        {this.renderBoard(boardData)}
+        {boardData.map(datarow => datarow.map(dataitem => (
+          <div key={dataitem.x * datarow.length + dataitem.y}>
+            <Tile
+              onClick={() => this.handleCellClick(dataitem.x, dataitem.y)}
+              cMenu={() => this.handleContextMenu(dataitem.x, dataitem.y)}
+              doubleClick={() => this.handleDoubleClick(dataitem.x, dataitem.y)}
+              value={dataitem}
+            />
+            {datarow[datarow.length - 1] === dataitem ? <div className="clear" /> : ''}
+          </div>
+        )))}
       </div>
     );
   }
