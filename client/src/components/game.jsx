@@ -38,6 +38,7 @@ export default class Game extends React.Component {
       1: 'Game About to Begin',
       2: 'Game in Progress',
       3: 'Game Over',
+      4: 'You Win!!!',
     };
     this.setState({
       gameState: x,
