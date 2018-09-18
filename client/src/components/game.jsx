@@ -59,7 +59,14 @@ export default class Game extends React.Component {
     return (
       <div className="game" style={styles.game}>
         <StatusBar gameMessage={gameMessage} mineCount={mines} />
-        <Board height={height} width={width} mines={mines} />
+        <Board
+          height={height}
+          width={width}
+          mines={mines}
+          incrementMines={() => this.incrementMines()}
+          decrementMines={() => this.decrementMines()}
+          changeGameState={x => this.changeGameState(x)}
+        />
       </div>
     );
   }
