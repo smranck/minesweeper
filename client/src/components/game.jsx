@@ -15,6 +15,7 @@ export default class Game extends React.Component {
   }
 
   incrementMines() {
+    // Increments mines
     let { mines } = this.state;
     mines += 1;
     this.setState({
@@ -23,6 +24,7 @@ export default class Game extends React.Component {
   }
 
   decrementMines() {
+    // Decrements mines
     let { mines } = this.state;
     mines -= 1;
     this.setState({
@@ -31,7 +33,7 @@ export default class Game extends React.Component {
   }
 
   changeGameState(x) {
-    // changecs gamestate and message
+    // change gamestate and message
     let messages = {
       1: 'Game About to Begin',
       2: 'Game in Progress',
