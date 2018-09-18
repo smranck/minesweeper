@@ -242,10 +242,8 @@ export default class Board extends React.Component {
       }
     }
     if (isWin) {
-      this.setState({
-        gameState: 3,
-        gameMessage: 'YOU WON!!!!!!!!!',
-      })
+      let { changeGameState } = this.props;
+      changeGameState(4);
     }
     return isWin;
   }
@@ -253,10 +251,9 @@ export default class Board extends React.Component {
   // function to handle losses
   handleLoss() {
     this.revealBoard();
+    let { changeGameState } = this.props;
     console.log('Big Loser baby');
-    this.setState({
-      gameMessage: 'YOU LOST!!!!!!!!!!',
-    });
+    changeGameState(3);
   }
 
   // last thing adds a clearfix div after the last cell of each row, or should. Needed?
