@@ -9,9 +9,6 @@ export default class Board extends React.Component {
     let boardInfo = this.initBoardData(height, width, mines);
     this.state = {
       boardData: boardInfo,
-      gameMessage: 'Game In Progress',
-      mineCount: mines,
-      gameState: 1, // game state 1 is pregame, 2 is in game, 3 is game over
     };
   }
 
@@ -129,9 +126,8 @@ export default class Board extends React.Component {
     let data = this.createEmptyArray(height, width);
     data = this.plantMines(data, height, width, mines);
     data = this.getNeighbors(data, height, width);
-    this.setState({
-      gameState: 1,
-    })
+    let { changeGameState } = this.props;
+    changeGameState(1);
     return data;
   }
 
@@ -184,23 +180,20 @@ export default class Board extends React.Component {
 
     this.setState({
       boardData: updatedBoard,
-      // if the game is lost, that's gameState. Otherwise in progress
-      gameState: gameLoss ? 3 : 2,
     });
   }
 
   // might someday handle overflagging
   handleContextMenu(x, y) {
     console.log('handling right click from Board.jsx');
-    let { boardData, mineCount } = this.state;
+    let { boardData } = this.state;
+    let { mines } = this.props;
     let updatedBoard = boardData.slice();
     if (updatedBoard[x][y].isRevealed === false) {
       updatedBoard[x][y].isFlagged = !updatedBoard[x][y].isFlagged;
-      updatedBoard[x][y].isFlagged ? (mineCount -= 1) : (mineCount += 1);
-      this.setState({
-        boardData: updatedBoard,
-        mineCount,
-      });
+      updatedBoard[x][y].isFlagged ? (mines -= 1) : (mines += 1);
+      let { changeMineCount } = this.props;
+      changeMineCount(mines);
     }
   }
 
