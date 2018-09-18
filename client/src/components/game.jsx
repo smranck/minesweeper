@@ -31,20 +31,15 @@ export default class Game extends React.Component {
   }
 
   changeGameState(x) {
-    this.setState({
-      gameState: x,
-    });
-  }
-
-  changeGameMessage() {
-    let { gameState } = this.gameState;
+    // changecs gamestate and message
     let messages = {
       1: 'Game About to Begin',
       2: 'Game in Progress',
       3: 'Game Over',
     };
     this.setState({
-      gameMessage: messages[gameState],
+      gameState: x,
+      gameMessage: messages[x],
     });
   }
 
