@@ -2,7 +2,7 @@ import React from 'react';
 // eslint-disable-next-line react/prefer-stateless-function
 export default class StatusBar extends React.Component {
   render() {
-    let { mineCount, gameMessage } = this.props;
+    let { mineCount, gameMessage, newGame } = this.props;
 
     return (
       <div className="game-info">
@@ -11,7 +11,7 @@ export default class StatusBar extends React.Component {
           {mineCount}
         </span>
         <span className="info">{gameMessage}</span>
-        <button className="new-game" type="button">
+        <button className="new-game" type="button" onClick={() => newGame()}>
           New Game?
         </button>
       </div>
