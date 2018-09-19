@@ -9,24 +9,13 @@ export default class Game extends React.Component {
       height: 8,
       width: 8,
       mines: 10,
-      gameMessage: 'Game in Progress',
+      gameMessage: 'Game About to Begin',
       gameState: 1, // game state 1 is pregame, 2 is in game, 3 is game less, 4 is game win
     };
   }
 
-  incrementMines() {
+  changeMineCount(mines) {
     // Increments mines
-    let { mines } = this.state;
-    mines += 1;
-    this.setState({
-      mines,
-    });
-  }
-
-  decrementMines() {
-    // Decrements mines
-    let { mines } = this.state;
-    mines -= 1;
     this.setState({
       mines,
     });
@@ -64,8 +53,7 @@ export default class Game extends React.Component {
           height={height}
           width={width}
           mines={mines}
-          incrementMines={() => this.incrementMines()}
-          decrementMines={() => this.decrementMines()}
+          changeMineCount={m => this.changeMineCount(m)}
           changeGameState={x => this.changeGameState(x)}
         />
       </div>
