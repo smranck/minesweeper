@@ -58,11 +58,7 @@ export default class Game extends React.Component {
     };
     return (
       <div className="game" style={styles.game}>
-        <StatusBar
-          gameMessage={gameMessage}
-          mineCount={mines}
-          newGame={() => this.startNewGame()}
-        />
+        <StatusBar gameMessage={gameMessage} mineCount={mines} />
         <Board
           height={height}
           width={width}
