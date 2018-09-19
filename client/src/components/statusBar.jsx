@@ -10,8 +10,10 @@ export default class StatusBar extends React.Component {
           Mines:
           {mineCount}
         </span>
-        <br />
         <span className="info">{gameMessage}</span>
+        <button className="new-game" type="button">
+          New Game?
+        </button>
       </div>
     );
   }
