@@ -14,6 +14,16 @@ export default class Game extends React.Component {
     };
   }
 
+  startNewGame() {
+    this.setState({
+      height: 8,
+      width: 8,
+      mines: 10,
+      gameMessage: 'Game About to Begin',
+      gameState: 1,
+    });
+  }
+
   changeMineCount(mines) {
     // Increments mines
     this.setState({
