@@ -11,16 +11,20 @@ export default class Game extends React.Component {
       mines: 10,
       gameMessage: 'Game About to Begin',
       gameState: 1, // game state 1 is pregame, 2 is in game, 3 is game less, 4 is game win
+      gameNumber: 1,
     };
   }
 
   startNewGame() {
+    let { gameNumber } = this.state;
+    gameNumber += 1;
     this.setState({
       height: 8,
       width: 8,
       mines: 10,
       gameMessage: 'Game About to Begin',
       gameState: 1,
+      gameNumber,
     });
   }
 
@@ -47,7 +51,7 @@ export default class Game extends React.Component {
 
   render() {
     const {
-      height, width, mines, gameMessage,
+      height, width, mines, gameMessage, gameNumber,
     } = this.state;
     const styles = {
       game: {
@@ -58,8 +62,13 @@ export default class Game extends React.Component {
     };
     return (
       <div className="game" style={styles.game}>
-        <StatusBar gameMessage={gameMessage} mineCount={mines} />
+        <StatusBar
+          gameMessage={gameMessage}
+          mineCount={mines}
+          newGame={() => this.startNewGame()}
+        />
         <Board
+          key={gameNumber}
           height={height}
           width={width}
           mines={mines}
