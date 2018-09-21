@@ -57,6 +57,7 @@ export default class Game extends React.Component {
     return (
       <div className="game">
         <StatusBar
+          key={gameNumber * 2}
           gameMessage={gameMessage}
           mineCount={mines}
           newGame={() => this.startNewGame()}
