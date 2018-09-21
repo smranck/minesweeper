@@ -128,7 +128,7 @@ export default class Board extends React.Component {
     data = this.plantMines(data, height, width, mines);
     data = this.getNeighbors(data, height, width);
     let { changeGameState } = this.props;
-    changeGameState(2);
+    changeGameState(1);
     return data;
   }
 
@@ -153,11 +153,9 @@ export default class Board extends React.Component {
   }
 
   handleCellClick(x, y) {
-    console.log('handling Cell click from Board.jsx');
     let { boardData } = this.state;
     let updatedBoard = boardData.slice();
     let gameLoss = false;
-    // console.log(updatedBoard[x][y]);
     // check whether it was already revealed or flagged
     if (updatedBoard[x][y].isRevealed || updatedBoard[x][y].isFlagged) {
       return;
