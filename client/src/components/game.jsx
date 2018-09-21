@@ -53,15 +53,9 @@ export default class Game extends React.Component {
     const {
       height, width, mines, gameMessage, gameNumber,
     } = this.state;
-    const styles = {
-      game: {
-        maxWidth: '400px',
-        margin: '0 auto',
-        padding: '20px',
-      },
-    };
+
     return (
-      <div className="game" style={styles.game}>
+      <div className="game">
         <StatusBar
           gameMessage={gameMessage}
           mineCount={mines}
