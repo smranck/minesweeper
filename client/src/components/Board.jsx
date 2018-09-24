@@ -206,11 +206,14 @@ export default class Board extends React.Component {
     let { boardData } = this.state;
     let updatedBoard = boardData.slice();
 
-    // handle an hidden tile, or a mine, or a flag
-    if (!updatedBoard[x][y].isRevealed || updatedBoard[x][y].isMine || updatedBoard[x][y].isFlagged) {
+    // handle an hidden tile, or a mine, 
+    // or a flag, or a 0 tile (would already be revealed neighbors)
+    if (!updatedBoard[x][y].isRevealed || updatedBoard[x][y].isMine || updatedBoard[x][y].isFlagged || updatedBoard[x][y].neighbor === 0) {
       return;
     }
 
+    // otherwise, we do things
+    
   }
 
   // function to reveal whole board on game end
