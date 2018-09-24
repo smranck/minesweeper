@@ -166,6 +166,7 @@ export default class Board extends React.Component {
       this.handleLoss();
       gameLoss = true;
       // gameState 3 will offer a new game in rendered modal
+      // that's what gameLoss will someday do
     }
     // handle an empty
     if (updatedBoard[x][y].neighbor === 0) {
@@ -217,6 +218,14 @@ export default class Board extends React.Component {
     this.setState({
       boardData: updatedBoard,
     });
+  }
+
+  // function will reveal each surrounding, 1 by 1
+  // not reveal if it's a flag
+  // if it's a mine, do handleLoss
+  revealNeighbors(x, y, data) {
+    let updatedData = data.slice();
+
   }
 
   // function to reveal whole board on game end
