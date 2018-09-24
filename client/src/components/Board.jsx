@@ -213,7 +213,10 @@ export default class Board extends React.Component {
     }
 
     // otherwise, we do things
-    
+    updatedBoard = this.revealNeighbors(x, y, updatedBoard);
+    this.setState({
+      boardData: updatedBoard,
+    });
   }
 
   // function to reveal whole board on game end
