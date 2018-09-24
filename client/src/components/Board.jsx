@@ -152,6 +152,7 @@ export default class Board extends React.Component {
     return board;
   }
 
+  // want to change game status to in progress, win, or loss
   handleCellClick(x, y) {
     let { boardData } = this.state;
     let updatedBoard = boardData.slice();
@@ -202,6 +203,14 @@ export default class Board extends React.Component {
   // then set state
   handleDoubleClick(x, y) {
     console.log('handling a double click mon!!!!!')
+    let { boardData } = this.state;
+    let updatedBoard = boardData.slice();
+
+    // handle an hidden tile, or a mine, or a flag
+    if (!updatedBoard[x][y].isRevealed || updatedBoard[x][y].isMine || updatedBoard[x][y].isFlagged) {
+      return;
+    }
+
   }
 
   // function to reveal whole board on game end
