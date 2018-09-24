@@ -225,7 +225,24 @@ export default class Board extends React.Component {
   // if it's a mine, do handleLoss
   revealNeighbors(x, y, data) {
     let updatedData = data.slice();
+    let neighbors = this.traverseBoard(x, y, updatedData);
 
+    let currentIndex = 0;
+    let hitMine = false;
+
+    // each thing in neighbors has an x and a y, can set from there 
+    while (!hitMine && currentIndex < neighbors.length) {
+      let currentNeighbor = neighbors[currentIndex];
+      if (currentNeighbor.isMine) {
+        hitMine = true;
+        this.handleLoss();
+      } else {
+        updatedData[currentNeighbor.x][currentNeighbor.y].isRevealed = true;
+      }
+      currentIndex += 1;
+    }
+    
+    return updatedData;
   }
 
   // function to reveal whole board on game end
