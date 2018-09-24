@@ -227,13 +227,27 @@ export default class Board extends React.Component {
     let updatedData = data.slice();
     let neighbors = this.traverseBoard(x, y, updatedData);
 
+    // count the number of adjacent mines
+    let neighborFlags = 0;
+    for (let i = 0; i < neighbors.length; i += 1) {
+      let currentNeighbor = neighbors[i];
+      if (currentNeighbor.isFlagged) {
+        neighborFlags += 1;
+      }
+    }
+
+    // do nothing if the number of surrounding flags is not what it should be
+    if (neighborFlags !== updatedData[x][y].neighbor) {
+      return updatedData;
+    }
+
     let currentIndex = 0;
     let hitMine = false;
 
-    // each thing in neighbors has an x and a y, can set from there 
+    // each thing in neighbors has an x and a y, can set from there
     while (!hitMine && currentIndex < neighbors.length) {
       let currentNeighbor = neighbors[currentIndex];
-      if (currentNeighbor.isMine) {
+      if (!currentNeighbor.isFlagged && currentNeighbor.isMine) {
         hitMine = true;
         this.handleLoss();
       } else {
@@ -241,7 +255,7 @@ export default class Board extends React.Component {
       }
       currentIndex += 1;
     }
-    
+
     return updatedData;
   }
 
