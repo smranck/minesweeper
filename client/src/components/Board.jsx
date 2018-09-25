@@ -250,8 +250,12 @@ export default class Board extends React.Component {
       if (!currentNeighbor.isFlagged && currentNeighbor.isMine) {
         hitMine = true;
         this.handleLoss();
-      } else {
-        updatedData[currentNeighbor.x][currentNeighbor.y].isRevealed = true;
+      } else if (!currentNeighbor.isFlagged) {
+        if (currentNeighbor.neighbor === 0) {
+          updatedData = this.revealEmpty(currentNeighbor.x, currentNeighbor.y, updatedData)
+        } else {
+          updatedData[currentNeighbor.x][currentNeighbor.y].isRevealed = true;
+        }
       }
       currentIndex += 1;
     }
