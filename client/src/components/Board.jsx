@@ -12,7 +12,6 @@ export default class Board extends React.Component {
     };
   }
 
-  // function to look at a cell's neighbors to see if they are mines and remembers it
   // this is the source of the number in the cell
   getNeighbors(data, height, width) {
     let updatedData = data;
@@ -37,6 +36,7 @@ export default class Board extends React.Component {
     return updatedData;
   }
 
+  // function to create an empty board
   createEmptyArray(height, width) {
     const data = [];
     for (let i = 0; i < height; i += 1) {
@@ -56,7 +56,7 @@ export default class Board extends React.Component {
     return data;
   }
 
-  // not returning anthing!
+  // function to add mines to an empty board
   plantMines(data, height, width, mines) {
     let x;
     let y;
@@ -244,13 +244,15 @@ export default class Board extends React.Component {
     let currentIndex = 0;
     let hitMine = false;
 
-    // each thing in neighbors has an x and a y, can set from there
+    // check each neighboring tile and handle as needed
     while (!hitMine && currentIndex < neighbors.length) {
       let currentNeighbor = neighbors[currentIndex];
+      // if the neighbor is an unflagged mine, lose the game
       if (!currentNeighbor.isFlagged && currentNeighbor.isMine) {
         hitMine = true;
         this.handleLoss();
       } else if (!currentNeighbor.isFlagged) {
+        // Only do these things if the neighbor is not flagged
         if (currentNeighbor.neighbor === 0) {
           updatedData = this.revealEmpty(currentNeighbor.x, currentNeighbor.y, updatedData);
         } else {
@@ -308,7 +310,6 @@ export default class Board extends React.Component {
   }
 
   // last thing adds a clearfix div after the last cell of each row, or should. Needed?
-
   render() {
     const { boardData } = this.state;
     return (
