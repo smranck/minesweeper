@@ -252,7 +252,7 @@ export default class Board extends React.Component {
         this.handleLoss();
       } else if (!currentNeighbor.isFlagged) {
         if (currentNeighbor.neighbor === 0) {
-          updatedData = this.revealEmpty(currentNeighbor.x, currentNeighbor.y, updatedData)
+          updatedData = this.revealEmpty(currentNeighbor.x, currentNeighbor.y, updatedData);
         } else {
           updatedData[currentNeighbor.x][currentNeighbor.y].isRevealed = true;
         }
