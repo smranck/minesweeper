@@ -271,7 +271,9 @@ export default class Board extends React.Component {
     let updatedBoard = boardData.slice();
     for (let i = 0; i < updatedBoard.length; i += 1) {
       for (let j = 0; j < updatedBoard[i].length; j += 1) {
-        updatedBoard[i][j].isRevealed = true;
+        if (!updatedBoard[i][j].isFlagged) {
+          updatedBoard[i][j].isRevealed = true;
+        };
       }
     }
     this.setState({
