@@ -77,50 +77,50 @@ export default class Board extends React.Component {
 
   // looks for neighboring cells and returns them
   traverseBoard(x, y, data) {
-    const el = [];
+    const neighbors = [];
     let { height, width } = this.props;
 
     // up
     if (x > 0) {
-      el.push(data[x - 1][y]);
+      neighbors.push(data[x - 1][y]);
     }
 
     // down
     if (x < height - 1) {
-      el.push(data[x + 1][y]);
+      neighbors.push(data[x + 1][y]);
     }
 
     // left
     if (y > 0) {
-      el.push(data[x][y - 1]);
+      neighbors.push(data[x][y - 1]);
     }
 
     // right
     if (y < width - 1) {
-      el.push(data[x][y + 1]);
+      neighbors.push(data[x][y + 1]);
     }
 
     // top left
     if (x > 0 && y > 0) {
-      el.push(data[x - 1][y - 1]);
+      neighbors.push(data[x - 1][y - 1]);
     }
 
     // top right
     if (x > 0 && y < width - 1) {
-      el.push(data[x - 1][y + 1]);
+      neighbors.push(data[x - 1][y + 1]);
     }
 
     // bottom right
     if (x < height - 1 && y < width - 1) {
-      el.push(data[x + 1][y + 1]);
+      neighbors.push(data[x + 1][y + 1]);
     }
 
     // bottom left
     if (x < height - 1 && y > 0) {
-      el.push(data[x + 1][y - 1]);
+      neighbors.push(data[x + 1][y - 1]);
     }
 
-    return el;
+    return neighbors;
   }
 
   initBoardData(height, width, mines) {
