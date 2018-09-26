@@ -20,7 +20,6 @@ export default class Board extends React.Component {
         if (data[i][j].isMine !== true) {
           let mine = 0;
           const area = this.traverseBoard(data[i][j].x, data[i][j].y, data);
-          // console.log('******************GETNEIGHBORS', area);
           area.map((value) => {
             if (value.isMine) {
               mine += 1;
@@ -198,17 +197,13 @@ export default class Board extends React.Component {
     }
   }
 
-  // this should check if the number of flags is the same as the neighbors value
-  // if so, reveal all neighbors that aren't flagged
-  // if any bombs are revealed, it's a loss
-  // then set state
+  // handles double clicks
   handleDoubleClick(x, y) {
     console.log('handling a double click mon!!!!!')
     let { boardData } = this.state;
     let updatedBoard = boardData.slice();
 
-    // handle an hidden tile, or a mine, 
-    // or a flag, or a 0 tile (would already be revealed neighbors)
+    // handle outside cases
     if (!updatedBoard[x][y].isRevealed || updatedBoard[x][y].isMine || updatedBoard[x][y].isFlagged || updatedBoard[x][y].neighbor === 0) {
       return;
     }
@@ -220,9 +215,7 @@ export default class Board extends React.Component {
     });
   }
 
-  // function will reveal each surrounding, 1 by 1
-  // not reveal if it's a flag
-  // if it's a mine, do handleLoss
+  // Reveals neighbors of target tile if correct flags surrounding
   revealNeighbors(x, y, data) {
     let updatedData = data.slice();
     let neighbors = this.traverseBoard(x, y, updatedData);
@@ -316,7 +309,6 @@ export default class Board extends React.Component {
     const { boardData } = this.state;
     return (
       <div className="board">
-        {console.log(boardData, 'Returning in Board render')}
         {boardData.map(datarow => datarow.map(dataitem => (
           <div key={dataitem.x * datarow.length + dataitem.y}>
             <Tile
