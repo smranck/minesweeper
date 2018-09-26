@@ -37,11 +37,11 @@ export default class Board extends React.Component {
 
   // function to create an empty board
   createEmptyArray(height, width) {
-    const data = [];
+    const emptyBoard = [];
     for (let i = 0; i < height; i += 1) {
-      data[i] = [];
+      emptyBoard[i] = [];
       for (let j = 0; j < width; j += 1) {
-        data[i][j] = {
+        emptyBoard[i][j] = {
           x: i,
           y: j,
           isMine: false,
@@ -52,7 +52,7 @@ export default class Board extends React.Component {
         };
       }
     }
-    return data;
+    return emptyBoard;
   }
 
   // function to add mines to an empty board
@@ -156,6 +156,9 @@ export default class Board extends React.Component {
     let { boardData } = this.state;
     let updatedBoard = boardData.slice();
     let gameLoss = false;
+    // start the game
+    let { changeGameState } = this.props;
+    changeGameState(2);
     // check whether it was already revealed or flagged
     if (updatedBoard[x][y].isRevealed || updatedBoard[x][y].isFlagged) {
       return;
