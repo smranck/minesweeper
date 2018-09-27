@@ -5,7 +5,7 @@ import Tile from './Tile.jsx';
 export default class Board extends React.Component {
   constructor(props) {
     super(props);
-    let { height, width, mines } = this.props;
+    let { height, width, mines, gameState } = this.props;
     let boardInfo = this.initBoardData(height, width, mines);
     this.state = {
       boardData: boardInfo,
@@ -157,16 +157,22 @@ export default class Board extends React.Component {
     let updatedBoard = boardData.slice();
     let gameLoss = false;
     // start the game
-    let { changeGameState } = this.props;
-    changeGameState(2);
+    let { changeGameState, gameState } = this.props;
+    let gameStateAfterClick = gameState;
     // check whether it was already revealed or flagged
     if (updatedBoard[x][y].isRevealed || updatedBoard[x][y].isFlagged) {
       return;
     }
     // handle a bomb
     if (updatedBoard[x][y].isMine) {
-      this.handleLoss();
-      gameLoss = true;
+      if (gameState === 1) {
+        updatedBoard = this.preventLoss(x, y);
+        gameStateAfterClick = 2;
+      } else {
+        this.handleLoss();
+        gameLoss = true;
+        gameStateAfterClick = 3;
+      }
       // gameState 3 will offer a new game in rendered modal
       // that's what gameLoss will someday do
     }
@@ -179,8 +185,12 @@ export default class Board extends React.Component {
 
     if (!updatedBoard[x][y].isMine && this.checkForWin()) {
       console.log('You WON!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+      gameStateAfterClick = 4;
     }
 
+    if (gameStateAfterClick !== gameState) {
+      changeGameState(gameStateAfterClick);
+    }
     this.setState({
       boardData: updatedBoard,
     });
@@ -305,6 +315,27 @@ export default class Board extends React.Component {
     let { changeGameState } = this.props;
     console.log('Big Loser baby');
     changeGameState(3);
+  }
+
+  // function to prevent loss on first click by reassigning that mine
+  preventLoss(x, y) {
+    console.log('LOSS PREVENTED *******************')
+    let { boardData } = this.state;
+    let { height, width } = this.props;
+    let updatedBoard = boardData.slice();
+    updatedBoard[x][y].isMine = false;
+    let newMineMade = false;
+    while (!newMineMade) {
+      let row = Math.floor(Math.random() * width);
+      let col = Math.floor(Math.random() * height);
+      // handle case of reassign to same tile
+      if (row !== x && col !== y && !updatedBoard[row][col].isMine) {
+        updatedBoard[row][col].isMine = true;
+        newMineMade = true;
+      }
+    }
+    updatedBoard = this.getNeighbors(updatedBoard, height, width);
+    return updatedBoard;
   }
 
   // last thing adds a clearfix div after the last cell of each row, or should. Needed?
