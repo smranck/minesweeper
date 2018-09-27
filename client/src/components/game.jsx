@@ -51,7 +51,7 @@ export default class Game extends React.Component {
 
   render() {
     const {
-      height, width, mines, gameMessage, gameNumber,
+      height, width, mines, gameMessage, gameNumber, gameState,
     } = this.state;
 
     return (
@@ -69,6 +69,7 @@ export default class Game extends React.Component {
           mines={mines}
           changeMineCount={m => this.changeMineCount(m)}
           changeGameState={x => this.changeGameState(x)}
+          gameState={gameState}
         />
       </div>
     );
