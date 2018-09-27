@@ -13,26 +13,26 @@ export default class Board extends React.Component {
   }
 
   // this is the source of the number in the cell
-  getNeighbors(data, height, width) {
-    let updatedData = data;
+  getNeighbors(board, height, width) {
+    let updatedBoard = board.slice();
     for (let i = 0; i < height; i += 1) {
       for (let j = 0; j < width; j += 1) {
-        if (data[i][j].isMine !== true) {
-          let mine = 0;
-          const area = this.traverseBoard(data[i][j].x, data[i][j].y, data);
-          area.map((value) => {
-            if (value.isMine) {
-              mine += 1;
+        if (board[i][j].isMine !== true) {
+          let neighboringMines = 0;
+          const neighboringTiles = this.traverseBoard(board[i][j].x, board[i][j].y, board);
+          for (let tile = 0; tile < neighboringTiles.length; tile += 1) {
+            if (neighboringTiles[tile].isMine) {
+              neighboringMines += 1;
             }
-          });
-          if (mine === 0) {
-            updatedData[i][j].isEmpty = true;
           }
-          updatedData[i][j].neighbor = mine;
+          if (neighboringMines === 0) {
+            updatedBoard[i][j].isEmpty = true;
+          }
+          updatedBoard[i][j].neighbor = neighboringMines;
         }
       }
     }
-    return updatedData;
+    return updatedBoard;
   }
 
   // function to create an empty board
