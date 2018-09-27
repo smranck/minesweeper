@@ -187,6 +187,10 @@ export default class Board extends React.Component {
       console.log('You WON!!!!!!!!!!!!!!!!!!!!!!!!!!!');
       gameStateAfterClick = 4;
     }
+    // in none of the above cases, still need to change gameState after click
+    if (gameStateAfterClick === 1) {
+      gameStateAfterClick += 1;
+    }
 
     if (gameStateAfterClick !== gameState) {
       changeGameState(gameStateAfterClick);
