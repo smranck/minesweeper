@@ -306,10 +306,7 @@ export default class Board extends React.Component {
         tileCount += 1;
       }
     }
-    if (isWin) {
-      let { changeGameState } = this.props;
-      changeGameState(4);
-    }
+
     return isWin;
   }
 
