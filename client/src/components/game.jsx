@@ -1,6 +1,7 @@
 import React from 'react';
 import Board from './Board.jsx';
 import StatusBar from './StatusBar.jsx';
+import Modal from './Modal.jsx';
 
 export default class Game extends React.Component {
   constructor(props) {
@@ -62,6 +63,7 @@ export default class Game extends React.Component {
           mineCount={mines}
           newGame={() => this.startNewGame()}
         />
+        <Modal />
         <Board
           key={gameNumber}
           height={height}
