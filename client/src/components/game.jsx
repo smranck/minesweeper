@@ -63,7 +63,11 @@ export default class Game extends React.Component {
           mineCount={mines}
           newGame={() => this.startNewGame()}
         />
-        <Modal show={gameState > 2} gameState={gameState} newGame={() => this.startNewGame()} />
+        {gameState > 2 ? (
+          <Modal show={gameState > 2} gameState={gameState} newGame={() => this.startNewGame()} />
+        ) : (
+          ''
+        )}
         <Board
           key={gameNumber}
           height={height}
