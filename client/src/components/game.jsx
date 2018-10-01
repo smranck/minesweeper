@@ -13,6 +13,7 @@ export default class Game extends React.Component {
       gameMessage: 'Game About to Begin',
       gameState: 1, // game state 1 is pregame, 2 is in game, 3 is game less, 4 is game win
       gameNumber: 1,
+      showModal: false,
     };
   }
 
@@ -50,9 +51,16 @@ export default class Game extends React.Component {
     });
   }
 
+  toggleModal() {
+    let { showModal } = this.state;
+    this.setState({
+      showModal: !showModal,
+    });
+  }
+
   render() {
     const {
-      height, width, mines, gameMessage, gameNumber, gameState,
+      height, width, mines, gameMessage, gameNumber, gameState, showModal,
     } = this.state;
 
     return (
@@ -63,8 +71,13 @@ export default class Game extends React.Component {
           mineCount={mines}
           newGame={() => this.startNewGame()}
         />
-        {gameState > 2 ? (
-          <Modal show={gameState > 2} gameState={gameState} newGame={() => this.startNewGame()} />
+        {showModal ? (
+          <Modal
+            show={gameState > 2}
+            gameState={gameState}
+            newGame={() => this.startNewGame()}
+            toggleModal={() => this.toggleModal()}
+          />
         ) : (
           ''
         )}
@@ -76,6 +89,7 @@ export default class Game extends React.Component {
           changeMineCount={m => this.changeMineCount(m)}
           changeGameState={x => this.changeGameState(x)}
           gameState={gameState}
+          toggleModal={() => this.toggleModal()}
         />
       </div>
     );

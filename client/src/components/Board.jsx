@@ -157,7 +157,7 @@ export default class Board extends React.Component {
     let updatedBoard = boardData.slice();
     let gameLoss = false;
     // start the game
-    let { changeGameState, gameState } = this.props;
+    let { changeGameState, gameState, toggleModal } = this.props;
     let gameStateAfterClick = gameState;
     // check whether it was already revealed or flagged
     if (updatedBoard[x][y].isRevealed || updatedBoard[x][y].isFlagged) {
@@ -186,6 +186,7 @@ export default class Board extends React.Component {
     if (!updatedBoard[x][y].isMine && this.checkForWin()) {
       console.log('You WON!!!!!!!!!!!!!!!!!!!!!!!!!!!');
       gameStateAfterClick = 4;
+
     }
     // in none of the above cases, still need to change gameState after click
     if (gameStateAfterClick === 1) {
@@ -194,6 +195,9 @@ export default class Board extends React.Component {
 
     if (gameStateAfterClick !== gameState) {
       changeGameState(gameStateAfterClick);
+      if (gameStateAfterClick > 2) {
+        toggleModal();
+      }
     }
     this.setState({
       boardData: updatedBoard,
@@ -313,9 +317,10 @@ export default class Board extends React.Component {
   // function to handle losses
   handleLoss() {
     this.revealBoard();
-    let { changeGameState } = this.props;
+    let { changeGameState, toggleModal } = this.props;
     console.log('Big Loser baby');
     changeGameState(3);
+    toggleModal();
   }
 
   // function to prevent loss on first click by reassigning that mine
