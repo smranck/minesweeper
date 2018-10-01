@@ -27,6 +27,7 @@ export default class Game extends React.Component {
       gameMessage: 'Game About to Begin',
       gameState: 1,
       gameNumber,
+      showModal: false,
     });
   }
 
