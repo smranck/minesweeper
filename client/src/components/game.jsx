@@ -66,12 +66,6 @@ export default class Game extends React.Component {
 
     return (
       <div className="game">
-        <StatusBar
-          key={gameNumber * 2}
-          gameMessage={gameMessage}
-          mineCount={mines}
-          newGame={() => this.startNewGame()}
-        />
         {showModal ? (
           <Modal
             show={gameState > 2}
@@ -82,16 +76,25 @@ export default class Game extends React.Component {
         ) : (
           ''
         )}
-        <Board
-          key={gameNumber}
-          height={height}
-          width={width}
-          mines={mines}
-          changeMineCount={m => this.changeMineCount(m)}
-          changeGameState={x => this.changeGameState(x)}
-          gameState={gameState}
-          toggleModal={() => this.toggleModal()}
-        />
+        <div className={showModal ? 'grayed' : ''}>
+          <StatusBar
+            key={gameNumber * 2}
+            gameMessage={gameMessage}
+            mineCount={mines}
+            newGame={() => this.startNewGame()}
+          />
+
+          <Board
+            key={gameNumber}
+            height={height}
+            width={width}
+            mines={mines}
+            changeMineCount={m => this.changeMineCount(m)}
+            changeGameState={x => this.changeGameState(x)}
+            gameState={gameState}
+            toggleModal={() => this.toggleModal()}
+          />
+        </div>
       </div>
     );
   }
