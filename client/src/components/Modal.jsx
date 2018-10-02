@@ -9,6 +9,7 @@ export default class Modal extends React.Component {
       <div className="modal">
         {gameState === 4 ? 'You Won!' : 'You Lost!'}
         <button
+          className="button"
           type="button"
           onClick={(e) => {
             e.preventDefault();
@@ -18,6 +19,7 @@ export default class Modal extends React.Component {
           New Game
         </button>
         <button
+          className="button"
           type="button"
           onClick={(e) => {
             e.preventDefault();
