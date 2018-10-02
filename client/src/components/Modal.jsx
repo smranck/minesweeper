@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+// ok it's not really a modal after all, but I like the way this looks
 // eslint-disable-next-line react/prefer-stateless-function
 export default class Modal extends React.Component {
   render() {
