@@ -66,24 +66,21 @@ export default class Game extends React.Component {
 
     return (
       <div>
-        {showModal ? (
-          <Modal
-            show={gameState > 2}
-            gameState={gameState}
-            newGame={() => this.startNewGame()}
-            toggleModal={() => this.toggleModal()}
-          />
-        ) : (
-          ''
-        )}
         <div className={`game${showModal ? ' grayed' : ''}`}>
-          <StatusBar
-            key={gameNumber * 2}
-            gameMessage={gameMessage}
-            mineCount={mines}
-            newGame={() => this.startNewGame()}
-          />
-
+          {showModal ? (
+            <Modal
+              gameState={gameState}
+              newGame={() => this.startNewGame()}
+              toggleModal={() => this.toggleModal()}
+            />
+          ) : (
+            <StatusBar
+              key={gameNumber * 2}
+              gameMessage={gameMessage}
+              mineCount={mines}
+              newGame={() => this.startNewGame()}
+            />
+          )}
           <Board
             key={gameNumber}
             height={height}
