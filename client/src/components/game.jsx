@@ -65,7 +65,7 @@ export default class Game extends React.Component {
     } = this.state;
 
     return (
-      <div className="game">
+      <div>
         {showModal ? (
           <Modal
             show={gameState > 2}
@@ -76,7 +76,7 @@ export default class Game extends React.Component {
         ) : (
           ''
         )}
-        <div className={showModal ? 'grayed' : ''}>
+        <div className={`game${showModal ? ' grayed' : ''}`}>
           <StatusBar
             key={gameNumber * 2}
             gameMessage={gameMessage}
