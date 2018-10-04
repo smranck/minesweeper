@@ -11,7 +11,7 @@ export default class Game extends React.Component {
       width: 8,
       mines: 10,
       gameMessage: 'Game About to Begin',
-      gameState: 1, // game state 1 is pregame, 2 is in game, 3 is game less, 4 is game win
+      gameState: 1, // game state 1 is pregame, 2 is in game, 3 is game loss, 4 is game win
       gameNumber: 1,
       showModal: false,
     };
