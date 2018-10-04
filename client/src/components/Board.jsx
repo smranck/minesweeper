@@ -186,7 +186,7 @@ export default class Board extends React.Component {
       updatedBoard[x][y].isRevealed = true;
     }
 
-    if (!updatedBoard[x][y].isMine && this.checkForWin()) {
+    if (!updatedBoard[x][y].isMine && this.checkForWin(updatedBoard)) {
       gameStateAfterClick = 4;
     }
     // in none of the above cases, still need to change gameState after click
@@ -298,8 +298,7 @@ export default class Board extends React.Component {
   }
 
   // function to check whether a board has been won. Returns a boolean.
-  checkForWin() {
-    let { boardData } = this.state;
+  checkForWin(boardData) {
     // iterate through board to see if it's a winning board
     let isWin = true;
     for (let i = 0; i < boardData.length; i += 1) {
