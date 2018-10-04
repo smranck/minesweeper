@@ -172,7 +172,6 @@ export default class Board extends React.Component {
         gameStateAfterClick = 2;
       } else {
         this.handleLoss();
-        gameLoss = true;
         gameStateAfterClick = 3;
       }
     }
