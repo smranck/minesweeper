@@ -3,10 +3,69 @@ import PropTypes from 'prop-types';
 import Tile from './Tile.jsx';
 
 export default class Board extends React.Component {
+  // function to create an empty board
+  static createEmptyArray(height, width) {
+    const emptyBoard = [];
+    for (let i = 0; i < height; i += 1) {
+      emptyBoard[i] = [];
+      for (let j = 0; j < width; j += 1) {
+        emptyBoard[i][j] = {
+          x: i,
+          y: j,
+          isMine: false,
+          wasClicked: false,
+          neighbor: 0,
+          isRevealed: false,
+          isEmpty: false,
+          isFlagged: false,
+        };
+      }
+    }
+    return emptyBoard;
+  }
+
+  // function to add mines to an empty board
+  static plantMines(data, height, width, mines) {
+    let x;
+    let y;
+    let minesPlanted = 0;
+    let updatedData = data;
+
+    while (minesPlanted < mines) {
+      x = Math.floor(Math.random() * width);
+      y = Math.floor(Math.random() * height);
+      if (!updatedData[x][y].isMine) {
+        updatedData[x][y].isMine = true;
+        minesPlanted += 1;
+      }
+    }
+
+    return updatedData;
+  }
+
+  // function to check whether a board has been won. Returns a boolean.
+  // change the gamestate and toggleModal on win because othing else for player to do
+  static checkForWin(boardData) {
+    // iterate through board to see if it's a winning board
+    let isWin = true;
+    for (let i = 0; i < boardData.length; i += 1) {
+      let tileCount = 0;
+      while (isWin && tileCount < boardData[i].length) {
+        // if any tile is not a mine and is not revealed, no win
+        if (!boardData[i][tileCount].isMine && !boardData[i][tileCount].isRevealed) {
+          isWin = false;
+        }
+        tileCount += 1;
+      }
+    }
+
+    return isWin;
+  }
+
   constructor(props) {
     super(props);
     let { height, width, mines, gameState } = this.props;
-    let boardInfo = this.initBoardData(height, width, mines);
+    let boardInfo = this.createBoard(height, width, mines);
     this.state = {
       boardData: boardInfo,
     };
@@ -33,45 +92,6 @@ export default class Board extends React.Component {
       }
     }
     return updatedBoard;
-  }
-
-  // function to create an empty board
-  createEmptyArray(height, width) {
-    const emptyBoard = [];
-    for (let i = 0; i < height; i += 1) {
-      emptyBoard[i] = [];
-      for (let j = 0; j < width; j += 1) {
-        emptyBoard[i][j] = {
-          x: i,
-          y: j,
-          isMine: false,
-          neighbor: 0,
-          isRevealed: false,
-          isEmpty: false,
-          isFlagged: false,
-        };
-      }
-    }
-    return emptyBoard;
-  }
-
-  // function to add mines to an empty board
-  plantMines(data, height, width, mines) {
-    let x;
-    let y;
-    let minesPlanted = 0;
-    let updatedData = data;
-
-    while (minesPlanted < mines) {
-      x = Math.floor(Math.random() * width);
-      y = Math.floor(Math.random() * height);
-      if (!updatedData[x][y].isMine) {
-        updatedData[x][y].isMine = true;
-        minesPlanted += 1;
-      }
-    }
-
-    return updatedData;
   }
 
   // looks for neighboring cells and returns them
@@ -122,9 +142,9 @@ export default class Board extends React.Component {
     return neighbors;
   }
 
-  initBoardData(height, width, mines) {
-    let data = this.createEmptyArray(height, width);
-    data = this.plantMines(data, height, width, mines);
+  createBoard(height, width, mines) {
+    let data = Board.createEmptyArray(height, width);
+    data = Board.plantMines(data, height, width, mines);
     data = this.getNeighbors(data, height, width);
     let { changeGameState } = this.props;
     changeGameState(1);
@@ -185,7 +205,7 @@ export default class Board extends React.Component {
       updatedBoard[x][y].isRevealed = true;
     }
 
-    if (!updatedBoard[x][y].isMine && this.checkForWin(updatedBoard)) {
+    if (!updatedBoard[x][y].isMine && Board.checkForWin(updatedBoard)) {
       gameStateAfterClick = 4;
     }
     // in none of the above cases, still need to change gameState after click
@@ -233,7 +253,7 @@ export default class Board extends React.Component {
     // otherwise, we do things
     updatedBoard = this.revealNeighbors(x, y, updatedBoard);
 
-    if (this.checkForWin(updatedBoard)) {
+    if (Board.checkForWin(updatedBoard)) {
       let { changeGameState, toggleModal } = this.props;
       changeGameState(4);
       toggleModal();
@@ -301,25 +321,6 @@ export default class Board extends React.Component {
     this.setState({
       boardData: updatedBoard,
     });
-  }
-
-  // function to check whether a board has been won. Returns a boolean.
-  // change the gamestate and toggleModal on win because othing else for player to do
-  checkForWin(boardData) {
-    // iterate through board to see if it's a winning board
-    let isWin = true;
-    for (let i = 0; i < boardData.length; i += 1) {
-      let tileCount = 0;
-      while (isWin && tileCount < boardData[i].length) {
-        // if any tile is not a mine and is not revealed, no win
-        if (!boardData[i][tileCount].isMine && !boardData[i][tileCount].isRevealed) {
-          isWin = false;
-        }
-        tileCount += 1;
-      }
-    }
-
-    return isWin;
   }
 
   // function to handle losses
