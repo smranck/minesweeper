@@ -155,14 +155,16 @@ export default class Board extends React.Component {
   handleCellClick(x, y) {
     let { boardData } = this.state;
     let updatedBoard = boardData.slice();
-    let gameLoss = false;
-    // start the game
-    let { changeGameState, gameState, toggleModal } = this.props;
-    let gameStateAfterClick = gameState;
+
     // check whether it was already revealed or flagged
     if (updatedBoard[x][y].isRevealed || updatedBoard[x][y].isFlagged) {
       return;
     }
+
+    // get relevent functions from props
+    let { changeGameState, gameState, toggleModal } = this.props;
+    let gameStateAfterClick = gameState;
+
     // handle a bomb
     if (updatedBoard[x][y].isMine) {
       if (gameState === 1) {
@@ -173,13 +175,14 @@ export default class Board extends React.Component {
         gameLoss = true;
         gameStateAfterClick = 3;
       }
-      // gameState 3 will offer a new game in rendered modal
-      // that's what gameLoss will someday do
     }
-    // handle an empty
+
+    // reveeal the tile
     if (updatedBoard[x][y].neighbor === 0) {
+      // handle an empty
       updatedBoard = this.revealEmpty(x, y, updatedBoard);
     } else {
+      // handle not empty
       updatedBoard[x][y].isRevealed = true;
     }
 
