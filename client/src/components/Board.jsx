@@ -184,9 +184,7 @@ export default class Board extends React.Component {
     }
 
     if (!updatedBoard[x][y].isMine && this.checkForWin()) {
-      console.log('You WON!!!!!!!!!!!!!!!!!!!!!!!!!!!');
       gameStateAfterClick = 4;
-
     }
     // in none of the above cases, still need to change gameState after click
     if (gameStateAfterClick === 1) {
@@ -206,7 +204,6 @@ export default class Board extends React.Component {
 
   // might someday handle overflagging
   handleContextMenu(x, y) {
-    console.log('handling right click from Board.jsx');
     let { boardData } = this.state;
     let { mines } = this.props;
     let updatedBoard = boardData.slice();
@@ -220,7 +217,6 @@ export default class Board extends React.Component {
 
   // handles double clicks
   handleDoubleClick(x, y) {
-    console.log('handling a double click mon!!!!!')
     let { boardData } = this.state;
     let updatedBoard = boardData.slice();
 
@@ -318,14 +314,13 @@ export default class Board extends React.Component {
   handleLoss() {
     this.revealBoard();
     let { changeGameState, toggleModal } = this.props;
-    console.log('Big Loser baby');
     changeGameState(3);
     toggleModal();
   }
 
   // function to prevent loss on first click by reassigning that mine
   preventLoss(x, y) {
-    console.log('LOSS PREVENTED *******************')
+    console.log('LOSS PREVENTED *******************');
     let { boardData } = this.state;
     let { height, width } = this.props;
     let updatedBoard = boardData.slice();
