@@ -7,27 +7,31 @@ export default class Modal extends React.Component {
     const { gameState, newGame, toggleModal } = this.props;
     return (
       <div className="modal">
-        {gameState === 4 ? 'You Won!' : 'You Lost!'}
-        <button
-          className="button"
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            newGame();
-          }}
-        >
-          New Game
-        </button>
-        <button
-          className="button"
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            toggleModal();
-          }}
-        >
-          Close
-        </button>
+        <span className="info">{gameState === 4 ? 'You Won!' : 'You Lost!'}</span>
+        <span>
+          <button
+            className="button info"
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              newGame();
+            }}
+          >
+            New Game
+          </button>
+        </span>
+        <span>
+          <button
+            className="button info"
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              toggleModal();
+            }}
+          >
+            Close
+          </button>
+        </span>
       </div>
     );
   }
