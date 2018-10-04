@@ -205,12 +205,15 @@ export default class Board extends React.Component {
   // might someday handle overflagging
   handleContextMenu(x, y) {
     let { boardData } = this.state;
-    let { mines } = this.props;
     let updatedBoard = boardData.slice();
     if (updatedBoard[x][y].isRevealed === false) {
+      let { mines, changeMineCount } = this.props;
       updatedBoard[x][y].isFlagged = !updatedBoard[x][y].isFlagged;
-      updatedBoard[x][y].isFlagged ? (mines -= 1) : (mines += 1);
-      let { changeMineCount } = this.props;
+      if (updatedBoard[x][y].isFlagged) {
+        mines -= 1;
+      } else {
+        mines += 1;
+      }
       changeMineCount(mines);
     }
   }
