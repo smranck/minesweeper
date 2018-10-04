@@ -11,9 +11,11 @@ export default class StatusBar extends React.Component {
           {mineCount}
         </span>
         <span className="info">{gameMessage}</span>
-        <button className="new-game button" type="button" onClick={() => newGame()}>
-          New Game?
-        </button>
+        <span className="info">
+          <button className="new-game button" type="button" onClick={() => newGame()}>
+            New Game?
+          </button>
+        </span>
       </div>
     );
   }
