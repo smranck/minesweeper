@@ -176,7 +176,7 @@ export default class Board extends React.Component {
       }
     }
 
-    // reveeal the tile
+    // reveal the tile
     if (updatedBoard[x][y].neighbor === 0) {
       // handle an empty
       updatedBoard = this.revealEmpty(x, y, updatedBoard);
@@ -232,6 +232,13 @@ export default class Board extends React.Component {
 
     // otherwise, we do things
     updatedBoard = this.revealNeighbors(x, y, updatedBoard);
+
+    if (this.checkForWin(updatedBoard)) {
+      let { changeGameState, toggleModal } = this.props;
+      changeGameState(4);
+      toggleModal();
+    }
+
     this.setState({
       boardData: updatedBoard,
     });
@@ -297,6 +304,7 @@ export default class Board extends React.Component {
   }
 
   // function to check whether a board has been won. Returns a boolean.
+  // change the gamestate and toggleModal on win because othing else for player to do
   checkForWin(boardData) {
     // iterate through board to see if it's a winning board
     let isWin = true;
