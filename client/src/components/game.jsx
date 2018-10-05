@@ -66,7 +66,7 @@ export default class Game extends React.Component {
 
     return (
       <div>
-        <div className={`game${showModal ? ' grayed' : ''}`}>
+        <div className={`game${gameState === 3 ? ' loser' : gameState === 4 ? ' winner' : ''}`}>
           {showModal ? (
             <Modal
               gameState={gameState}
