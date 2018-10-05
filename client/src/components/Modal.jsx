@@ -29,7 +29,7 @@ export default class Modal extends React.Component {
               toggleModal();
             }}
           >
-            Close
+            Back to Game Information
           </button>
         </span>
       </div>
