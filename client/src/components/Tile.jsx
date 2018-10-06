@@ -2,19 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class Tile extends React.Component {
-  getValue() {
-    const { tileData } = this.props;
-
-    if (!tileData.isRevealed) {
-      return tileData.isFlagged ? 'F' : null;
+  static getDisplayValue(tile) {
+    if (!tile.isRevealed) {
+      return tile.isFlagged ? 'F' : null;
     }
-    if (tileData.isMine) {
+    if (tile.isMine) {
       return 'B';
     }
-    if (tileData.neighbor === 0) {
+    if (tile.neighbor === 0) {
       return null;
     }
-    return tileData.neighbor;
+    return tile.neighbor;
   }
 
   // seems to have access to this.props so let's do that
@@ -49,7 +47,7 @@ export default class Tile extends React.Component {
         onContextMenu={e => this.handleContextMenu(e)}
         onDoubleClick={e => this.handleDoubleClick(e)}
       >
-        {this.getValue()}
+        {Tile.getDisplayValue(tileData)}
       </div>
     );
   }
