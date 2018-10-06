@@ -22,14 +22,12 @@ export default class Tile extends React.Component {
     e.preventDefault();
     let { tileData, onClick } = this.props;
     onClick(tileData.x, tileData.y);
-    // console.log(this.getValue());
   }
 
   handleContextMenu(e) {
     e.preventDefault();
     let { tileData, cMenu } = this.props;
     cMenu(tileData.x, tileData.y);
-    // console.log(this.getValue());
   }
 
   handleDoubleClick(e) {
