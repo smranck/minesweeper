@@ -193,6 +193,7 @@ export default class Board extends React.Component {
       } else {
         this.handleLoss();
         gameStateAfterClick = 3;
+        updatedBoard[x][y].wasClicked = true;
       }
     }
 
