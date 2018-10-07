@@ -39,7 +39,7 @@ export default class Tile extends React.Component {
 
     let className = `tile${tileData.isRevealed ? ' revealed' : ' hidden'}${
       tileData.isMine ? ' is-mine' : ''
-    }${tileData.isFlagged ? ' is-flag' : ''}`;
+    }${tileData.isFlagged ? ' is-flag' : ''}${tileData.wasClicked ? ' clicked' : ''}`;
     return (
       <div
         className={className}
