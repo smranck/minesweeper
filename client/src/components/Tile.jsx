@@ -61,12 +61,14 @@ let alertErrs = () => {
 Tile.defaultProps = {
   onClick: alertErrs,
   cMenu: alertErrs,
+  doubleClick: alertErrs,
   tileData: alertErrs,
 };
 
 Tile.propTypes = {
   onClick: PropTypes.func,
   cMenu: PropTypes.func,
+  doubleClick: PropTypes.func,
   tileData: PropTypes.shape({
     isEmpty: PropTypes.bool,
     isFlagged: PropTypes.bool,
@@ -75,5 +77,6 @@ Tile.propTypes = {
     neighbor: PropTypes.number,
     x: PropTypes.number,
     y: PropTypes.number,
+    wasClicked: PropTypes.bool,
   }),
 };
