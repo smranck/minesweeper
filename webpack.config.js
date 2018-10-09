@@ -9,7 +9,7 @@ module.exports = {
   entry: `${SRC_DIR}/index.jsx`,
   output: {
     filename: 'bundle.js',
-    path: path.join(__dirname, '/client/dist'),
+    path: DIST_DIR,
   },
   module: {
     rules: [
@@ -19,6 +19,10 @@ module.exports = {
         use: {
           loader: 'babel-loader',
         },
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
