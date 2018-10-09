@@ -15,6 +15,7 @@ todo.me
 
 # webpack
 client/dist/bundle.js
+client/dist/index.html
 
 # ds store? Not sure what this is right now
 client/.DS_Store
