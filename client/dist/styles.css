@@ -1,0 +1,98 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 20px;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.game {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.clear {
+  clear: both;
+  content: '';
+}
+
+.tile {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 0px;
+  background: #7b7b7b;
+  border: 1px solid #fff;
+  float: left;
+  line-height: 45px;
+  height: 45px;
+  text-align: center;
+  width: 45px;
+  cursor: pointer;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.revealed {
+  background: #d3d3d3;
+  color: black;
+}
+
+.revealed.is-mine {
+  background: red;
+}
+
+.game-info {
+  background: #19a0d9;
+  padding: 7px;
+  text-align: center;
+  color: #fff;
+  min-height: 100px;
+  border-radius: 7px;
+}
+
+.info {
+  display: block;
+  margin: 15px auto;
+}
+
+.board {
+  background-color: blue;
+  border-radius: 5px;
+}
+
+.grayed {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.modal {
+  background-color: white;
+  border-radius: 7px;
+  max-width: 500px;
+  min-height: 100px;
+  padding: 7px;
+  position: relative;
+  text-align: center;
+}
+
+.winner {
+  background-color: green;
+  color: green;
+}
+
+.loser {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: red;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.clicked {
+  color: pink;
+}
