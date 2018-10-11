@@ -25,6 +25,11 @@
 
 ## Development
 
+Possible updates:
+
+- Variable board size / mine count
+- Show non-mines remaining in StatusBar
+
 ### Installing Dependencies
 
 From within the root directory:
