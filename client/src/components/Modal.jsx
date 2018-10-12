@@ -36,3 +36,20 @@ export default class Modal extends React.Component {
     );
   }
 }
+
+// default props function
+let alertErrs = () => {
+  console.log('err in Modal.jsx props');
+};
+
+Modal.defaultProps = {
+  gameState: 1,
+  newGame: alertErrs,
+  toggleModal: alertErrs,
+};
+
+Modal.propTypes = {
+  newGame: PropTypes.func,
+  toggleModal: PropTypes.func,
+  gameState: PropTypes.number,
+};
