@@ -22,16 +22,19 @@ export default class StatusBar extends React.Component {
   }
 }
 
+// function for func props to use as default
 let alertErrs = () => {
   console.log('err in StatusBar.jsx props');
 };
 
+// default props in case of error
 StatusBar.defaultProps = {
   mineCount: 10,
   gameMessage: 'Error getting gameMessage in StatusBar',
   newGame: alertErrs,
 };
 
+// actual assertion of prop types
 StatusBar.propTypes = {
   mineCount: PropTypes.number,
   gameMessage: PropTypes.string,
