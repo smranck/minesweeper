@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 // eslint-disable-next-line react/prefer-stateless-function
 export default class StatusBar extends React.Component {
   render() {
@@ -20,3 +21,19 @@ export default class StatusBar extends React.Component {
     );
   }
 }
+
+let alertErrs = () => {
+  console.log('err in StatusBar.jsx props');
+};
+
+StatusBar.defaultProps = {
+  mineCount: 10,
+  gameMessage: 'Error getting gameMessage in StatusBar',
+  newGame: alertErrs,
+};
+
+StatusBar.propTypes = {
+  mineCount: PropTypes.number,
+  gameMessage: PropTypes.string,
+  newGame: PropTypes.func,
+};
