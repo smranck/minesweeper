@@ -388,3 +388,28 @@ export default class Board extends React.Component {
     );
   }
 }
+
+// function for function prop default
+let alertErrs = () => {
+  console.log('err in Board.jsx props');
+};
+// default props
+Board.defaultProps = {
+  height: 8,
+  width: 8,
+  mines: 10,
+  gameState: 1,
+  changeMineCount: alertErrs,
+  changeGameState: alertErrs,
+  toggleModal: alertErrs,
+};
+// prop types to compare
+Board.propTypes = {
+  height: PropTypes.number,
+  width: PropTypes.number,
+  mines: PropTypes.number,
+  gameState: PropTypes.number,
+  changeMineCount: PropTypes.func,
+  changeGameState: PropTypes.func,
+  toggleModal: PropTypes.func,
+};
