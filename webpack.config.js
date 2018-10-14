@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
 
 const SRC_DIR = path.join(__dirname, '/client/src');
 const DIST_DIR = path.join(__dirname, '/client/dist');
@@ -31,4 +30,5 @@ module.exports = {
       template: `${SRC_DIR}/index.html`,
     }),
   ],
+  resolve: { extensions: ['.js', '.jsx'] },
 };
