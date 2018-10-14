@@ -15,19 +15,21 @@ export default class Tile extends React.Component {
     return tile.neighbor;
   }
 
-  // seems to have access to this.props so let's do that
+  // function to handle tile click
   handleClick(e) {
     e.preventDefault();
     let { tileData, onClick } = this.props;
     onClick(tileData.x, tileData.y);
   }
 
+  // function to handle tile right click
   handleContextMenu(e) {
     e.preventDefault();
     let { tileData, cMenu } = this.props;
     cMenu(tileData.x, tileData.y);
   }
 
+  // function to handle tile double click
   handleDoubleClick(e) {
     e.preventDefault();
     let { tileData, doubleClick } = this.props;
@@ -53,18 +55,18 @@ export default class Tile extends React.Component {
   }
 }
 
-// function for default props
+// function for function prop default
 let alertErrs = () => {
   console.log('err in Tile.jsx props');
 };
-// seems right?
+// default props
 Tile.defaultProps = {
   onClick: alertErrs,
   cMenu: alertErrs,
   doubleClick: alertErrs,
   tileData: alertErrs,
 };
-
+// prop types to compare
 Tile.propTypes = {
   onClick: PropTypes.func,
   cMenu: PropTypes.func,
