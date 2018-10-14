@@ -1,7 +1,7 @@
 import React from 'react';
-import Board from './Board.jsx';
-import StatusBar from './StatusBar.jsx';
-import Modal from './Modal.jsx';
+import Board from './Board';
+import StatusBar from './StatusBar';
+import Modal from './Modal';
 
 export default class Game extends React.Component {
   constructor(props) {

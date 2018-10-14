@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Tile from './Tile.jsx';
+import Tile from './Tile';
 
 export default class Board extends React.Component {
   // function to create an empty board
@@ -331,7 +331,7 @@ export default class Board extends React.Component {
       for (let j = 0; j < updatedBoard[i].length; j += 1) {
         if (!updatedBoard[i][j].isFlagged) {
           updatedBoard[i][j].isRevealed = true;
-        };
+        }
       }
     }
     this.setState({
