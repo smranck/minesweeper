@@ -64,9 +64,17 @@ export default class Game extends React.Component {
       height, width, mines, gameMessage, gameNumber, gameState, showModal,
     } = this.state;
 
+    let stateClassName = '';
+
+    if (gameState === 3) {
+      stateClassName = ' loser';
+    } else if (gameState === 4) {
+      stateClassName = ' winner';
+    }
+
     return (
       <div>
-        <div className={`game${gameState === 3 ? ' loser' : gameState === 4 ? ' winner' : ''}`}>
+        <div className={`game${stateClassName}`}>
           {showModal ? (
             <Modal
               gameState={gameState}
