@@ -64,7 +64,7 @@ export default class Board extends React.Component {
 
   constructor(props) {
     super(props);
-    let { height, width, mines, gameState } = this.props;
+    let { height, width, mines } = this.props;
     let boardInfo = this.createBoard(height, width, mines);
     this.state = {
       boardData: boardInfo,
@@ -246,8 +246,23 @@ export default class Board extends React.Component {
     let { boardData } = this.state;
     let updatedBoard = boardData.slice();
 
-    // handle outside cases
-    if (!updatedBoard[x][y].isRevealed || updatedBoard[x][y].isMine || updatedBoard[x][y].isFlagged || updatedBoard[x][y].neighbor === 0) {
+    // return if the tile is revealed
+    if (!updatedBoard[x][y].isRevealed) {
+      return;
+    }
+
+    // return if the tile is flagged
+    if (updatedBoard[x][y].isFlagged) {
+      return;
+    }
+
+    // return if the tile is a mine - will already trigger a loss on first click
+    if (updatedBoard[x][y].isMine) {
+      return;
+    }
+
+    // return if the tile has no neighber mines - all neighbors will be revealed already
+    if (updatedBoard[x][y].neighbor === 0) {
       return;
     }
 
