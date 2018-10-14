@@ -151,11 +151,10 @@ export default class Board extends React.Component {
     return data;
   }
 
-  // function to reveal all adjacent when an empty is pressed
+  // function to reveal all adjacent tiles when an empty tile is clicked
   revealEmpty(x, y, boardData) {
     let board = boardData;
     // if revealed already, don't do anything
-    // base case
     if (board[x][y].isRevealed) {
       return board;
     }
@@ -168,6 +167,7 @@ export default class Board extends React.Component {
         board = this.revealEmpty(adjacents[i].x, adjacents[i].y, board);
       }
     }
+    // returns the new board with all adjacent empty tiles revealed
     return board;
   }
 
