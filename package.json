@@ -16,7 +16,7 @@
   },
   "author": "smranck",
   "license": "MIT",
-  "homepage": "https://smranck.github.io/minesweeper",
+  "homepage": "http://smranck.github.io/minesweeper",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
